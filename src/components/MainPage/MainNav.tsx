@@ -64,7 +64,7 @@ const MainNavWrapper = styled.div`
   text-align: center;
 
   .highlight {
-    color: blue;
+    color: #2F74C0;
   }
 
   > div {

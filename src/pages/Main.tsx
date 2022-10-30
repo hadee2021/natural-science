@@ -36,5 +36,6 @@ const MainWrapper = styled.div`
     margin: 35px 0;
     margin-right: 25px;
     border-radius: 9px;
+    padding: 30px;
   }
 `
