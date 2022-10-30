@@ -37,5 +37,6 @@ const MainWrapper = styled.div`
     margin-right: 25px;
     border-radius: 9px;
     padding: 30px;
+    overflow: auto;
   }
 `

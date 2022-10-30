@@ -1,9 +1,396 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
+import { storage } from '../../core/firestore'
+import { useEditQuestion } from '../../core/query'
+import { useForm, Controller } from 'react-hook-form'
+import { subjectObj, questionObj } from '../../module/subjectData'
+import { Box, Button, TextField, MenuItem, Tooltip, Typography } from '@mui/material'
+import styled from 'styled-components'
 
 const QuestionForm = () => {
+  /**업로드 */
+  const [imageUpload, setImageUpload] = useState<any>()
+  const [uploadFolderName, setUploadFolderName] = useState('')
+  const [imageURL, setImageURL] = useState('')
+
+  const upload = () => {
+    if (imageUpload === null) return
+    const imageRef = ref(storage, `${uploadFolderName}/${imageUpload.name}`)
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageURL(url)
+      })
+    })
+  }
+
+  /**문제 제출  */
+  const [inputSubject, setInputSubject] = useState<Subject>('physical')
+  const [inputStep, setInputStep] = useState<string>('1단원 역학')
+  const [inputYear, setInputVear] = useState<number>(2023)
+  const [inputMonth, setInputMonth] = useState<number>(3)
+  const [inputQNumber, setInputQNumber] = useState<number>(1)
+
+  useEffect(() => {
+    setInputStep(subjectObj[inputSubject].steps[0])
+  }, [inputSubject])
+
+  const questionForm = useForm<Question>({
+    mode: 'all',
+    reValidateMode: 'onChange'
+  })
+
+  const { 
+    handleSubmit,
+    control,
+    register,
+  } = questionForm
+
+  const {
+    editQuestion,
+    isLoading: isSaving
+  } =  useEditQuestion(subjectObj[inputSubject].subject, inputStep)
+
+  const OnSave = handleSubmit(form => {
+    if(isSaving) return
+
+    const {
+      questionYear,
+      questionMonth,
+      questionNumber,
+      questionSequence,
+      questionAnswer,
+      questionScore
+    } = form
+
+    const nextQuestionForm = {
+      subject: subjectObj[inputSubject].subject,
+      step: inputStep,
+      imgSrc: imageURL,
+      questionYear: questionYear,
+      questionMonth: questionMonth,
+      questionNumber: questionNumber,
+      questionSequence: questionSequence,
+      questionAnswer: questionAnswer,
+      questionScore: questionScore
+    }
+
+    editQuestion(nextQuestionForm)
+  })
+
   return (
-    <div>QuestionForm</div>
+    <QuestionFormWrapper>
+      {/* <div>
+        <span>과목: </span>
+        <Controller
+          name="subject"
+          control={control}
+          render={() => (
+            <select 
+              {...register("subject")}
+              onChange={(e) => setInputSubject(e.target.value as Subject)}
+            >
+              { 
+                subjectObj.subjects.map((subject, i) => (
+                  <option value={subject.id} key={i}>{subject.name}</option>
+              ))}
+            </select>
+          )}
+        />
+      </div> */}
+      
+      {/* <div>
+        <span>단원: </span>
+        <Controller 
+          name="step"
+          control={control}
+          render={() => (
+            <select 
+              onChange={(e) => setInputStep(e.target.value)}
+            >
+              { 
+                subjectObj[inputSubject as Subject].steps.map((step, i) => (
+                  <option value={step} key={i}>{step}</option>
+              ))}
+            </select>
+          )}
+        />
+      </div> */}
+      {/* <div>
+        <span>학년도:</span>
+        <Controller
+          name="questionYear"
+          control={control}
+          render={() => (
+            <select
+              {...register("questionYear")}
+            >
+              {
+                questionObj.years.map((year, i) => (
+                  <option value={year} key={i}>{year}</option>
+                ))
+              }
+            </select>
+          )}
+        />
+      </div> */}
+      <div className="title">
+        <h3>
+          관리자 전용 문제 제출 양식
+        </h3>
+      </div>
+      <div className="subject">
+        <Controller
+          name="subject"
+          control={control}
+          render={() => (
+            <TextField
+              select
+              label="과목"
+              value={inputSubject}
+              size="small"
+              onChange={(e) => setInputSubject(e.target.value as Subject)}
+            >
+              { 
+                subjectObj.subjects.map((subject, i) => (
+                  <MenuItem value={subject.id} key={i}>{subject.name}</MenuItem>
+              ))}
+            </TextField>
+          )}
+        />
+      </div>
+      <div className="step">
+        <Controller
+          name="step"
+          control={control}
+          render={() => (
+            <TextField
+              select
+              label="단원"
+              value={inputStep}
+              size="small"
+              onChange={(e) => setInputStep(e.target.value)}
+            >
+              { 
+                subjectObj[inputSubject as Subject].steps.map((step, i) => (
+                  <MenuItem value={step} key={i}>{step}</MenuItem>
+              ))}
+            </TextField>
+          )}
+        />
+      </div>
+      <div className="year">
+        <Controller
+          name="questionYear"
+          control={control}
+          render={() => (
+            <TextField
+              select
+              label="학년도"
+              size="small"
+              value={inputYear}
+              {...register("questionYear")}
+              onChange={(e) => setInputVear(Number.parseInt(e.target.value))}
+            >
+              {
+                questionObj.years.map((year, i) => (
+                  <MenuItem value={year} key={i}>{year}</MenuItem>
+                ))
+              }
+            </TextField>
+          )}
+        />
+      </div>
+      <div className="month">
+        <Controller
+          name="questionMonth"
+          control={control}
+          render={() => (
+            <TextField
+              select
+              label="월"
+              size="small"
+              value={inputMonth}
+              {...register("questionMonth")}
+              onChange={(e) => setInputMonth(Number.parseInt(e.target.value))}
+            >
+              {
+                questionObj.months.map((month, i) => (
+                  <MenuItem value={month} key={i}>{month}</MenuItem>
+                ))
+              }
+            </TextField>
+          )}
+        />
+      </div>
+      <div className="number">
+        <Controller
+          name="questionNumber"
+          control={control}
+          render={() => (
+            <TextField
+              select
+              label="문항 번호"
+              size="small"
+              value={inputQNumber}
+              {...register("questionNumber")}
+              onChange={(e) => setInputQNumber(Number.parseInt(e.target.value))}
+            >
+              {
+                questionObj.numbers.map((number, i) => (
+                  <MenuItem value={number} key={i} >{number}</MenuItem>
+                ))
+              }
+            </TextField>
+          )}
+        />
+      </div>
+      <div className="sequence">
+        <Controller
+          name="questionSequence"
+          control={control}
+          rules={{
+            required: "순서는 필수 입니다."
+          }}
+          render={({ fieldState }) => (
+            <Tooltip title="순서는 1 2 3 .." placement="bottom">
+              <TextField
+                error={Boolean(fieldState.error)}
+                required
+                label="순서"
+                variant="standard"
+                {...register("questionSequence")}
+                helperText={(
+                  <Box
+                    component="span"
+                    visibility={fieldState.error ? "visible" : "hidden"}
+                  >
+                    <span>
+                      {fieldState.error?.message}
+                    </span>
+                  </Box>
+                )}
+              />
+            </Tooltip>
+          )}
+        />
+      </div>
+      <div className="answer">
+        <Controller
+          name="questionAnswer"
+          control={control}
+          rules={{
+            required: "정답은 필수 입니다."
+          }}
+          render={({ fieldState }) => (
+            <Tooltip title="정답은 1 2 3 .." placement="bottom">
+              <TextField
+                error={Boolean(fieldState.error)}
+                required
+                label="정답"
+                variant="standard"
+                {...register("questionAnswer")}
+                helperText={(
+                  <Box
+                    component="span"
+                    visibility={fieldState.error ? "visible" : "hidden"}
+                  >
+                    <span>
+                      {fieldState.error?.message}
+                    </span>
+                  </Box>
+                )}
+              />
+            </Tooltip>
+          )}
+        />
+      </div>
+      <div className="score">
+        <Controller
+          name="questionScore"
+          control={control}
+          rules={{
+            required: "점수는 필수 입니다."
+          }}
+          render={({ fieldState }) => (
+            <Tooltip title="점수는 1 2 3 .." placement="bottom">
+              <TextField
+                error={Boolean(fieldState.error)}
+                required
+                label="점수"
+                variant="standard"
+                {...register("questionScore")}
+                helperText={(
+                  <Box
+                    component="span"
+                    visibility={fieldState.error ? "visible" : "hidden"}
+                  >
+                    <span>
+                      {fieldState.error?.message}
+                    </span>
+                  </Box>
+                )}
+              />
+            </Tooltip>
+          )}
+        />
+      </div>
+      <div className="file-upload">
+        <TextField
+          type="file"
+          size="small"
+          onChange={(event: any) => {
+            setImageUpload(event.target.files[0])
+          }}
+        />
+      </div>
+      <div className="file-folder">
+        <TextField 
+          placeholder="업로드 폴더이름"
+          size="small"
+          value={uploadFolderName}
+          onChange={(e) => setUploadFolderName(e.target.value)}
+        />
+        <Button 
+          onClick={upload}
+          variant="contained"
+          disabled={uploadFolderName === ''}
+        >
+          업로드
+        </Button>
+        <span>
+          ex. A폴더 / B폴더 / ...
+        </span>
+      </div>
+      <Button
+        variant="contained"
+        disabled={imageURL === ''}
+        sx={{ width: 200 }}
+        onClick={OnSave}
+      >
+        제출
+      </Button>
+      <div>
+        {imageURL === ''
+          ? <p>미리보기 준비중.....</p>
+          : <img src={imageURL} width={300 + 'px'}/>
+        }
+      </div>
+    </QuestionFormWrapper>
   )
 }
 
 export default QuestionForm
+
+const QuestionFormWrapper = styled.div`
+  > div {
+    margin-bottom: 20px;
+
+    .title {
+      h3 {
+        font-size: 25px;
+        font-weight: normal;
+      }
+    }
+
+  }
+`

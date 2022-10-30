@@ -100,7 +100,7 @@ const Start = () => {
         {
           tab === 'login' &&
           <>
-            <div
+            <span
               onClick={() => setTab('')}
             >
               <ArrowBackIcon
@@ -109,7 +109,7 @@ const Start = () => {
                   color: "#2F74C0"
                 }}
               />
-            </div>
+            </span>
             <Box>
               <Controller 
                 name="userName"

@@ -15,8 +15,8 @@ declare interface Question {
   subject: string
   step: string
   imgSrc: string
-  questionYear: string
-  questionMonth: string
+  questionYear: number
+  questionMonth: number
   questionNumber: number
   questionSequence: number
   questionAnswer: number
