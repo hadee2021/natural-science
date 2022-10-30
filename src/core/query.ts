@@ -60,6 +60,8 @@ export const useCreateUser = () => {
         id: userId,
         name: userName,
         pwd: hash(userPwd),
+        author: false,
+        checkQuestion: []
       })
     },
   }
@@ -88,7 +90,7 @@ export const useFindUser = (userName = '', userPwd = '') => {
   }
 }
 
-/** User 상세 정보 */
+/** User 상세 정보  id로 필드값 객체묶음 받아오기*/
 
 export const useUser = (userId : string) => {
   const userDocRef = getUserDocRef(userId)
