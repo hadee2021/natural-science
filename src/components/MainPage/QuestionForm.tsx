@@ -4,7 +4,7 @@ import { storage } from '../../core/firestore'
 import { useEditQuestion } from '../../core/query'
 import { useForm, Controller } from 'react-hook-form'
 import { subjectObj, questionObj } from '../../module/subjectData'
-import { Box, Button, TextField, MenuItem, Tooltip, Typography } from '@mui/material'
+import { Box, Button, TextField, MenuItem, Tooltip } from '@mui/material'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 

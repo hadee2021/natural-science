@@ -7,7 +7,7 @@ import Main from './pages/Main'
 import MainHome from './components/MainPage/MainHome'
 import PrivateRoute from './router/PrivateRoute'
 import MainReview from './components/MainPage/MainReview'
-import MainPriciple from './components/MainPage/MainPriciple'
+import MainPrinciple from './components/MainPage/MainPrinciple'
 import Study from './pages/Study'
 
 const Router = () => {
@@ -19,9 +19,9 @@ const Router = () => {
           <Route index element={<MainHome/>}/>
           <Route path="form" element={<PrivateRoute/>}/>
           <Route path="review" element={<MainReview/>} />
-          <Route path="principle" element={<MainPriciple/>}/>
+          <Route path="principle" element={<MainPrinciple/>}/>
         </Route>
-        <Route path="/study/:subject/:step" element={<Study/>}/>
+        <Route path="/study/:id/:subject/:step" element={<Study/>}/>
       </Routes>
     </BrowserRouter>
   )
