@@ -34,6 +34,17 @@ const getUserDocRef = (userId: string) => (
   doc(fireStore, ROOT_USER, userId || EMPTY_USER_ID).withConverter(userConverter)
 )
 
+const getQuestionCollectionRef = (subject: Subject | string, step: string) => {
+  return collection(
+    fireStore,
+    ROOT_QUESTION,
+    subject || EMPTY_SUBJECT,
+    STEP_LIST,
+    step || EMPTY_STEP,
+    QUESTION_LIST
+  ).withConverter(questionConverter)
+}
+
 const getQuestionDocRef = (subject: Subject | string, step: string, questionId: string) => {
   return doc(
     fireStore,
@@ -124,3 +135,38 @@ export const useEditQuestion = (subject: Subject | string, step: string, questio
   }
 }
 
+
+/** 단원별 문제들 가져오기 */
+
+export const useQuestionList = (subject: Subject | string, step: string) => {
+  const questionCollectionRef = getQuestionCollectionRef(subject, step)
+
+  const constraints: QueryConstraint[] = []
+  constraints.push(orderBy('questionSequence', 'asc'))
+  const queryConstraints = constraints
+
+  const ref = query(
+    questionCollectionRef,
+    ...queryConstraints
+  )
+
+  const {
+    data: questionList = [],
+    dataUpdatedAt,
+    ...result
+  } = useFirestoreQueryData(
+    [ROOT_QUESTION, subject, STEP_LIST, step, QUESTION_LIST],
+    ref,
+    { subscribe: true },
+    { enabled: Boolean(step) },
+  )
+
+  return useMemo(() => {
+
+    return {
+      questionList,
+      dataUpdatedAt,
+      ...result,
+    }
+  },[dataUpdatedAt])
+}
