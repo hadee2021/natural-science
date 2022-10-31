@@ -6,6 +6,7 @@ import { useForm, Controller } from 'react-hook-form'
 import { subjectObj, questionObj } from '../../module/subjectData'
 import { Box, Button, TextField, MenuItem, Tooltip, Typography } from '@mui/material'
 import styled from 'styled-components'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const QuestionForm = () => {
   /**업로드 */
@@ -50,6 +51,9 @@ const QuestionForm = () => {
     isLoading: isSaving
   } =  useEditQuestion(subjectObj[inputSubject].subject, inputStep)
 
+  const navigate = useNavigate()
+  const { id: userId = '' } = useParams()
+
   const OnSave = handleSubmit(form => {
     if(isSaving) return
 
@@ -61,6 +65,7 @@ const QuestionForm = () => {
       questionAnswer,
       questionScore
     } = form
+
 
     const nextQuestionForm = {
       subject: subjectObj[inputSubject].subject,
@@ -75,266 +80,225 @@ const QuestionForm = () => {
     }
 
     editQuestion(nextQuestionForm)
+
+    navigate(`/main/${userId}`)
   })
 
   return (
     <QuestionFormWrapper>
-      {/* <div>
-        <span>과목: </span>
-        <Controller
-          name="subject"
-          control={control}
-          render={() => (
-            <select 
-              {...register("subject")}
-              onChange={(e) => setInputSubject(e.target.value as Subject)}
-            >
-              { 
-                subjectObj.subjects.map((subject, i) => (
-                  <option value={subject.id} key={i}>{subject.name}</option>
-              ))}
-            </select>
-          )}
-        />
-      </div> */}
-      
-      {/* <div>
-        <span>단원: </span>
-        <Controller 
-          name="step"
-          control={control}
-          render={() => (
-            <select 
-              onChange={(e) => setInputStep(e.target.value)}
-            >
-              { 
-                subjectObj[inputSubject as Subject].steps.map((step, i) => (
-                  <option value={step} key={i}>{step}</option>
-              ))}
-            </select>
-          )}
-        />
-      </div> */}
-      {/* <div>
-        <span>학년도:</span>
-        <Controller
-          name="questionYear"
-          control={control}
-          render={() => (
-            <select
-              {...register("questionYear")}
-            >
-              {
-                questionObj.years.map((year, i) => (
-                  <option value={year} key={i}>{year}</option>
-                ))
-              }
-            </select>
-          )}
-        />
-      </div> */}
       <div className="title">
         <h3>
           관리자 전용 문제 제출 양식
         </h3>
       </div>
-      <div className="subject">
-        <Controller
-          name="subject"
-          control={control}
-          render={() => (
-            <TextField
-              select
-              label="과목"
-              value={inputSubject}
-              size="small"
-              onChange={(e) => setInputSubject(e.target.value as Subject)}
-            >
-              { 
-                subjectObj.subjects.map((subject, i) => (
-                  <MenuItem value={subject.id} key={i}>{subject.name}</MenuItem>
-              ))}
-            </TextField>
-          )}
-        />
-      </div>
-      <div className="step">
-        <Controller
-          name="step"
-          control={control}
-          render={() => (
-            <TextField
-              select
-              label="단원"
-              value={inputStep}
-              size="small"
-              onChange={(e) => setInputStep(e.target.value)}
-            >
-              { 
-                subjectObj[inputSubject as Subject].steps.map((step, i) => (
-                  <MenuItem value={step} key={i}>{step}</MenuItem>
-              ))}
-            </TextField>
-          )}
-        />
-      </div>
-      <div className="year">
-        <Controller
-          name="questionYear"
-          control={control}
-          render={() => (
-            <TextField
-              select
-              label="학년도"
-              size="small"
-              value={inputYear}
-              {...register("questionYear")}
-              onChange={(e) => setInputVear(Number.parseInt(e.target.value))}
-            >
-              {
-                questionObj.years.map((year, i) => (
-                  <MenuItem value={year} key={i}>{year}</MenuItem>
-                ))
-              }
-            </TextField>
-          )}
-        />
-      </div>
-      <div className="month">
-        <Controller
-          name="questionMonth"
-          control={control}
-          render={() => (
-            <TextField
-              select
-              label="월"
-              size="small"
-              value={inputMonth}
-              {...register("questionMonth")}
-              onChange={(e) => setInputMonth(Number.parseInt(e.target.value))}
-            >
-              {
-                questionObj.months.map((month, i) => (
-                  <MenuItem value={month} key={i}>{month}</MenuItem>
-                ))
-              }
-            </TextField>
-          )}
-        />
-      </div>
-      <div className="number">
-        <Controller
-          name="questionNumber"
-          control={control}
-          render={() => (
-            <TextField
-              select
-              label="문항 번호"
-              size="small"
-              value={inputQNumber}
-              {...register("questionNumber")}
-              onChange={(e) => setInputQNumber(Number.parseInt(e.target.value))}
-            >
-              {
-                questionObj.numbers.map((number, i) => (
-                  <MenuItem value={number} key={i} >{number}</MenuItem>
-                ))
-              }
-            </TextField>
-          )}
-        />
-      </div>
-      <div className="sequence">
-        <Controller
-          name="questionSequence"
-          control={control}
-          rules={{
-            required: "순서는 필수 입니다."
-          }}
-          render={({ fieldState }) => (
-            <Tooltip title="순서는 1 2 3 .." placement="bottom">
-              <TextField
-                error={Boolean(fieldState.error)}
-                required
-                label="순서"
-                variant="standard"
-                {...register("questionSequence")}
-                helperText={(
-                  <Box
-                    component="span"
-                    visibility={fieldState.error ? "visible" : "hidden"}
-                  >
-                    <span>
-                      {fieldState.error?.message}
-                    </span>
-                  </Box>
-                )}
-              />
-            </Tooltip>
-          )}
-        />
-      </div>
-      <div className="answer">
-        <Controller
-          name="questionAnswer"
-          control={control}
-          rules={{
-            required: "정답은 필수 입니다."
-          }}
-          render={({ fieldState }) => (
-            <Tooltip title="정답은 1 2 3 .." placement="bottom">
-              <TextField
-                error={Boolean(fieldState.error)}
-                required
-                label="정답"
-                variant="standard"
-                {...register("questionAnswer")}
-                helperText={(
-                  <Box
-                    component="span"
-                    visibility={fieldState.error ? "visible" : "hidden"}
-                  >
-                    <span>
-                      {fieldState.error?.message}
-                    </span>
-                  </Box>
-                )}
-              />
-            </Tooltip>
-          )}
-        />
-      </div>
-      <div className="score">
-        <Controller
-          name="questionScore"
-          control={control}
-          rules={{
-            required: "점수는 필수 입니다."
-          }}
-          render={({ fieldState }) => (
-            <Tooltip title="점수는 1 2 3 .." placement="bottom">
-              <TextField
-                error={Boolean(fieldState.error)}
-                required
-                label="점수"
-                variant="standard"
-                {...register("questionScore")}
-                helperText={(
-                  <Box
-                    component="span"
-                    visibility={fieldState.error ? "visible" : "hidden"}
-                  >
-                    <span>
-                      {fieldState.error?.message}
-                    </span>
-                  </Box>
-                )}
-              />
-            </Tooltip>
-          )}
-        />
-      </div>
+      <SectionContainer>
+        <LeftSection>
+          <div className="subject">
+            <Controller
+              name="subject"
+              control={control}
+              render={() => (
+                <TextField
+                  sx={{ width: '150px'}}
+                  select
+                  label="과목"
+                  value={inputSubject}
+                  size="small"
+                  onChange={(e) => setInputSubject(e.target.value as Subject)}
+                >
+                  { 
+                    subjectObj.subjects.map((subject, i) => (
+                      <MenuItem value={subject.id} key={i}>{subject.name}</MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+          </div>
+          <div className="step">
+            <Controller
+              name="step"
+              control={control}
+              render={() => (
+                <TextField
+                  sx={{ width: '150px'}}
+                  select
+                  label="단원"
+                  value={inputStep}
+                  size="small"
+                  onChange={(e) => setInputStep(e.target.value)}
+                >
+                  { 
+                    subjectObj[inputSubject as Subject].steps.map((step, i) => (
+                      <MenuItem value={step} key={i}>{step}</MenuItem>
+                  ))}
+                </TextField>
+              )}
+            />
+          </div>
+          <div className="year">
+            <Controller
+              name="questionYear"
+              control={control}
+              render={() => (
+                <TextField
+                  sx={{ width: '150px'}}
+                  select
+                  label="학년도"
+                  size="small"
+                  value={inputYear}
+                  {...register("questionYear")}
+                  onChange={(e) => setInputVear(Number.parseInt(e.target.value))}
+                >
+                  {
+                    questionObj.years.map((year, i) => (
+                      <MenuItem value={year} key={i}>{year}</MenuItem>
+                    ))
+                  }
+                </TextField>
+              )}
+            />
+          </div>
+          <div className="month">
+            <Controller
+              name="questionMonth"
+              control={control}
+              render={() => (
+                <TextField
+                  select
+                  label="월"
+                  size="small"
+                  value={inputMonth}
+                  {...register("questionMonth")}
+                  onChange={(e) => setInputMonth(Number.parseInt(e.target.value))}
+                >
+                  {
+                    questionObj.months.map((month, i) => (
+                      <MenuItem value={month} key={i}>{month}</MenuItem>
+                    ))
+                  }
+                </TextField>
+              )}
+            />
+          </div>
+          <div className="number">
+            <Controller
+              name="questionNumber"
+              control={control}
+              render={() => (
+                <TextField
+                  sx={{ width: '150px'}}
+                  select
+                  label="문항 번호"
+                  size="small"
+                  value={inputQNumber}
+                  {...register("questionNumber")}
+                  onChange={(e) => setInputQNumber(Number.parseInt(e.target.value))}
+                >
+                  {
+                    questionObj.numbers.map((number, i) => (
+                      <MenuItem value={number} key={i} >{number}</MenuItem>
+                    ))
+                  }
+                </TextField>
+              )}
+            />
+          </div>
+        </LeftSection>
+        <RightSection>
+          <div className="sequence">
+            <Controller
+              name="questionSequence"
+              control={control}
+              rules={{
+                required: "순서는 필수 입니다."
+              }}
+              render={({ fieldState }) => (
+                <Tooltip title="순서는 1 2 3 .." placement="bottom">
+                  <TextField
+                    error={Boolean(fieldState.error)}
+                    required
+                    label="순서"
+                    variant="standard"
+                    {...register("questionSequence")}
+                    helperText={(
+                      <Box
+                        component="span"
+                        visibility={fieldState.error ? "visible" : "hidden"}
+                      >
+                        <span>
+                          {fieldState.error?.message}
+                        </span>
+                      </Box>
+                    )}
+                  />
+                </Tooltip>
+              )}
+            />
+          </div>
+          <div className="score">
+            <Controller
+              name="questionScore"
+              control={control}
+              rules={{
+                required: "점수는 필수 입니다."
+              }}
+              render={({ fieldState }) => (
+                <Tooltip title="점수는 1 2 3 .." placement="bottom">
+                  <TextField
+                    error={Boolean(fieldState.error)}
+                    required
+                    label="점수"
+                    variant="standard"
+                    {...register("questionScore")}
+                    helperText={(
+                      <Box
+                        component="span"
+                        visibility={fieldState.error ? "visible" : "hidden"}
+                      >
+                        <span>
+                          {fieldState.error?.message}
+                        </span>
+                      </Box>
+                    )}
+                  />
+                </Tooltip>
+              )}
+            />
+          </div>
+          <div className="answer">
+            <Controller
+              name="questionAnswer"
+              control={control}
+              rules={{
+                required: "정답은 필수 입니다."
+              }}
+              render={({ fieldState }) => (
+                <Tooltip title="정답은 1 2 3 .." placement="bottom">
+                  <TextField
+                    error={Boolean(fieldState.error)}
+                    required
+                    label="정답"
+                    variant="standard"
+                    {...register("questionAnswer")}
+                    helperText={(
+                      <Box
+                        component="span"
+                        visibility={fieldState.error ? "visible" : "hidden"}
+                      >
+                        <span>
+                          {fieldState.error?.message}
+                        </span>
+                      </Box>
+                    )}
+                  />
+                </Tooltip>
+              )}
+            />
+          </div>
+        </RightSection>
+      </SectionContainer>
       <div className="file-upload">
+        <p>문제 사진 업로드</p>
         <TextField
           type="file"
           size="small"
@@ -345,7 +309,7 @@ const QuestionForm = () => {
       </div>
       <div className="file-folder">
         <TextField 
-          placeholder="업로드 폴더이름"
+          placeholder="저장 할 위치 폴더경로"
           size="small"
           value={uploadFolderName}
           onChange={(e) => setUploadFolderName(e.target.value)}
@@ -383,14 +347,47 @@ export default QuestionForm
 
 const QuestionFormWrapper = styled.div`
   > div {
-    margin-bottom: 20px;
-
+    
     .title {
       h3 {
         font-size: 25px;
         font-weight: normal;
       }
     }
+  }
 
+  .file-upload {
+    margin-bottom: 20px;
+  }
+
+  .file-folder {
+    margin-bottom: 30px;
+    > div,
+    > button
+    {
+      margin-right: 15px;
+    }
+  }
+
+`
+const SectionContainer = styled.div`
+  display: flex;
+  border-bottom: 1px solid orangered;
+  margin-bottom: 40px;
+`
+
+const LeftSection = styled.div`
+  flex: 1;
+
+  > div {
+    margin-bottom: 20px;
+  }
+`
+
+const RightSection = styled.div`
+  flex: 1;
+
+  > div {
+    margin-bottom: 20px;
   }
 `
