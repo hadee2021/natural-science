@@ -7,6 +7,9 @@ import { subjectObj, questionObj } from '../../module/subjectData'
 import { Box, Button, TextField, MenuItem, Tooltip } from '@mui/material'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import { useDeepCompareEffect } from 'use-deep-compare'
 
 const QuestionForm = () => {
   /**업로드 */
@@ -27,7 +30,7 @@ const QuestionForm = () => {
   /**문제 제출  */
   const [inputSubject, setInputSubject] = useState<Subject>('physical')
   const [inputStep, setInputStep] = useState<string>('1단원 역학')
-  const [inputYear, setInputVear] = useState<number>(2023)
+  const [inputYear, setInputYear] = useState<number>(2023)
   const [inputMonth, setInputMonth] = useState<number>(3)
   const [inputQNumber, setInputQNumber] = useState<number>(1)
 
@@ -35,10 +38,32 @@ const QuestionForm = () => {
     setInputStep(subjectObj[inputSubject].steps[0])
   }, [inputSubject])
 
+  ///// 수정 ////
+  const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
+  const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+  //////////////
+
   const questionForm = useForm<Question>({
     mode: 'all',
     reValidateMode: 'onChange'
   })
+
+  ///// 수정 ////
+  useDeepCompareEffect(() => {
+    if(!questionUpdate) return
+    setInputSubject(questionData.subject as Subject)
+    setInputStep(questionData.step)
+    setImageURL(questionData.imgSrc)
+    setInputYear(questionData.questionYear)
+    setInputMonth(questionData.questionMonth)
+    setInputQNumber(questionData.questionNumber)
+    questionForm.reset({
+      questionSequence: questionData.questionSequence !== 1 ? questionData.questionSequence : 1,
+      questionAnswer: questionData.questionAnswer !== 1 ? questionData.questionAnswer : 1,
+      questionScore: questionData.questionScore !== 1 ? questionData.questionScore : 1
+    })
+  },[questionData])
+  //////////////
 
   const { 
     handleSubmit,
@@ -46,10 +71,20 @@ const QuestionForm = () => {
     register,
   } = questionForm
 
+  ////// 수정 /////
+  let questionUpdateId
+  if(questionData.id !== '') {
+    questionUpdateId = questionData.id
+  }
+  else if(questionData.id === '') {
+    questionUpdateId = undefined
+  }
+  ////////////////
+
   const {
     editQuestion,
     isLoading: isSaving
-  } =  useEditQuestion(subjectObj[inputSubject].subject, inputStep)
+  } =  useEditQuestion(subjectObj[inputSubject].subject, inputStep, questionUpdateId) //id 는 수정로직
 
   const navigate = useNavigate()
   const { id: userId = '' } = useParams()
@@ -147,7 +182,7 @@ const QuestionForm = () => {
                   size="small"
                   value={inputYear}
                   {...register("questionYear")}
-                  onChange={(e) => setInputVear(Number.parseInt(e.target.value))}
+                  onChange={(e) => setInputYear(Number.parseInt(e.target.value))}
                 >
                   {
                     questionObj.years.map((year, i) => (

@@ -21,7 +21,7 @@ const Router = () => {
           <Route path="review" element={<MainReview/>} />
           <Route path="principle" element={<MainPrinciple/>}/>
         </Route>
-        <Route path="/study/:id/:subject/:step" element={<Study/>}/>
+        <Route path="/study/:id/:subject/:step/:subjectId" element={<Study/>}/>
       </Routes>
     </BrowserRouter>
   )

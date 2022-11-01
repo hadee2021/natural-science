@@ -2,7 +2,10 @@ import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import OMR from '../OMR'
-import { Button } from '@mui/material'
+import { Button, IconButton } from '@mui/material'
+import { EditOutlined } from '@mui/icons-material'
+import { useRecoilState } from 'recoil'
+import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
 
 interface Props {
   question: Question
@@ -12,11 +15,37 @@ const QuestionCard = ({question}:Props) => {
   const { 
     id: userId = '',
     subject = '',
-    step = ''
+    step = '',
+    subjectId = ''
   } = useParams()
+  const navigate = useNavigate()
 
   const [omrMarking, setOmrMarking] = useState<boolean[]>([false, false, false, false, false])
   const [showAnswer, setShowAnwser] = useState<boolean>(false)
+
+    ///// 수정 ////
+    const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
+    const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+    //////////////
+
+  const onUpdate = (question: Question) => {
+    setQuestionData({
+      ...questionData,
+      id: question.id,
+      subject: subjectId,
+      step: question.step,
+      imgSrc: question.imgSrc,
+      questionYear: question.questionYear,
+      questionMonth: question.questionMonth,
+      questionNumber: question.questionNumber,
+      questionSequence: question.questionSequence,
+      questionAnswer: question.questionAnswer,
+      questionScore: question.questionScore
+    })
+    setQuestionUpdate(true)
+    navigate(`/main/${userId}/form`)
+  }
+
 
   return (
     <QuestionCardWrapper>
@@ -33,7 +62,15 @@ const QuestionCard = ({question}:Props) => {
         </div>
       </CardHeader>
       <CardNav>
-        <div className="space"></div>
+        <div className="space">
+          <IconButton
+            size="small" 
+            color="secondary"
+            onClick={() => onUpdate(question)}
+          >
+            <EditOutlined fontSize="small"/>
+          </IconButton>
+        </div>
         <NavBody>
           <OMR
             omrMarking={omrMarking}

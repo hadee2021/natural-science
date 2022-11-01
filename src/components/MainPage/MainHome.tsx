@@ -5,11 +5,20 @@ import { useUser } from '../../core/query'
 import { Button } from '@mui/material'
 import { Fab } from '@mui/material'
 import { Add } from '@mui/icons-material'
+import { useRecoilState } from 'recoil'
+import { IsQuestionUpdateAtom } from '../../core/Atom'
 
 const MainHome = () => {
   const { id: userId = '' } = useParams()
   const { user } = useUser(userId)
   const navigate = useNavigate()
+
+  const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+
+  const goToForm = () => {
+    setQuestionUpdate(false) // 수정이 아니다.
+    navigate(`/main/${userId}/form`)
+  }
 
   return (
     <MainHomeWrapper>
@@ -34,7 +43,7 @@ const MainHome = () => {
           right: 20,
           bottom: 20
         }}
-        onClick={() => navigate(`/main/${userId}/form`)}
+        onClick={() => goToForm()}
       >
         <Add fontSize="large" />
       </Fab>

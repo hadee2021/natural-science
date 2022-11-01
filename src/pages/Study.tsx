@@ -5,6 +5,7 @@ import { useQuestionList } from '../core/query'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import QuestionCard from '../components/StudyPage/QuestionCard'
+import CloseIcon from '@material-ui/icons/Close';
 
 const responsive = {
   superLargeDesktop: {
@@ -36,11 +37,16 @@ const Study = () => {
   const { questionList } = useQuestionList(subject, step)
 
   console.log('questionList', questionList)
+  const navigate = useNavigate()
 
   return (
     <StudyWrapper>
       <StudyContainer>
-        <div>닫기</div>
+        <div className="close-btn">
+          <CloseIcon
+            onClick={() => navigate(`/main/${userId}/principle`)}
+          />
+        </div>
         <Carousel responsive={responsive} className="carousel">
           {questionList.length !== 0
           ? questionList.map((question: Question) => (
@@ -72,4 +78,10 @@ const StudyContainer = styled.div`
   padding: 30px;
   overflow: auto;
   flex: 1;
+
+  .close-btn {
+    > svg {
+      cursor: pointer;
+    }
+  }
 `

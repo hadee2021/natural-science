@@ -12,7 +12,7 @@ const MainPrinciple = () => {
   const [tabSubject, setTabSubject] = useState<Subject>('physical')
 
   const goToStudy = (step: string) => {
-    navigate(`/study/${userId}/${subjectObj[tabSubject].subject}/${step}`)
+    navigate(`/study/${userId}/${subjectObj[tabSubject].subject}/${step}/${tabSubject}`)
   }
 
   return (
