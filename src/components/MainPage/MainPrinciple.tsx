@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { useRecoilState } from 'recoil'
-import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import { questionDataAtom, IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { useQuestionList } from '../../core/query'
 
 
@@ -21,6 +21,7 @@ const MainPrinciple = () => {
   //// 빠른추가 ////
   const [questionData, setQuestionData] = useRecoilState(questionDataAtom)
   const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+  const [questionQuickAdd, setQuestionQuickAdd] = useRecoilState(IsQuickAddAtom)
 
 
   const quickAdd = (step: string) => {
@@ -37,6 +38,7 @@ const MainPrinciple = () => {
       questionScore: 1
     })
     setQuestionUpdate(true) // 수정의 로직 사용
+    setQuestionQuickAdd(true) // 빠른 추가 승인
     navigate(`/main/${userId}/form/${subjectObj[tabSubject].subject}/${step}`)
   }
 

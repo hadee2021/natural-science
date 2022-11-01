@@ -8,7 +8,7 @@ import { Box, Button, TextField, MenuItem, Tooltip } from '@mui/material'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
-import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import { questionDataAtom, IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { useDeepCompareEffect } from 'use-deep-compare'
 import { useQuestionList } from '../../core/query'
 
@@ -46,6 +46,7 @@ const QuestionForm = () => {
   ///// 빠른 추가 시퀀스 구하기 ////
   const { questionList } = useQuestionList(subject, step)
   const [newQuestionSequence, setNewQuestionSequence] = useState(1)
+  const [questionQuickAdd, setQuestionQuickAdd] = useRecoilState(IsQuickAddAtom)
 
   useEffect(() => {
     if(questionUpdate) {
@@ -84,6 +85,14 @@ const QuestionForm = () => {
     })
   },[questionData])
   //////////////
+
+  //빠른추가 //
+  useEffect(() => {
+    questionForm.reset({
+      questionSequence: newQuestionSequence
+    })
+  },[newQuestionSequence])
+  ///////////
 
   const { 
     handleSubmit,
@@ -139,6 +148,8 @@ const QuestionForm = () => {
       step : '',
       questionSequence : 1,
     })
+    setQuestionUpdate(false) // 수정 끝
+    setQuestionQuickAdd(false) // 빠른추가 끝
 
     navigate(`/main/${userId}`)
   })
@@ -278,7 +289,7 @@ const QuestionForm = () => {
                     required
                     label="순서"
                     variant="standard"
-                    value={newQuestionSequence}
+                    // value={newQuestionSequence}
                     {...register("questionSequence")}
                     onChange={(e) => setNewQuestionSequence(Number(e.target.value))}
                     helperText={(
@@ -295,6 +306,7 @@ const QuestionForm = () => {
                 </Tooltip>
               )}
             />
+            {newQuestionSequence}
           </div>
           <div className="score">
             <Controller

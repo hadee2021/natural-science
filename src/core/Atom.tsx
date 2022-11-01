@@ -20,3 +20,8 @@ export const IsQuestionUpdateAtom = atom({
   key: 'questionUpdate',
   default: false
 })
+
+export const IsQuickAddAtom = atom({
+  key: 'quickAdd',
+  default: false
+})
