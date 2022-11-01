@@ -20,6 +20,7 @@ const MainHome = () => {
     setQuestionData({
       ...questionData,
       step : '',
+      questionSequence: 1,
     })
     setQuestionUpdate(false) // 수정이 아니다.
     navigate(`/main/${userId}/form`)

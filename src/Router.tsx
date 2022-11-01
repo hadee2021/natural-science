@@ -18,6 +18,7 @@ const Router = () => {
         <Route path="/main/:id" element={<Main/>}>
           <Route index element={<MainHome/>}/>
           <Route path="form" element={<PrivateRoute/>}/>
+          <Route path="form/:subject/:step" element={<PrivateRoute/>}/>
           <Route path="review" element={<MainReview/>} />
           <Route path="principle" element={<MainPrinciple/>}/>
         </Route>

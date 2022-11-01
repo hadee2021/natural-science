@@ -10,6 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
 import { useDeepCompareEffect } from 'use-deep-compare'
+import { useQuestionList } from '../../core/query'
 
 const QuestionForm = () => {
   /**업로드 */
@@ -35,11 +36,28 @@ const QuestionForm = () => {
   const [inputQNumber, setInputQNumber] = useState<number>(1)
 
   
+  const navigate = useNavigate()
+  const { 
+    id: userId = '',
+    subject = '',
+    step = '',
+  } = useParams()
+
+  ///// 빠른 추가 시퀀스 구하기 ////
+  const { questionList } = useQuestionList(subject, step)
+  const [newQuestionSequence, setNewQuestionSequence] = useState(1)
+
+  useEffect(() => {
+    if(questionUpdate) {
+      setNewQuestionSequence(questionList.length + 1)
+    }
+  }, [questionList])
+  ////
 
   ///// 수정 ////
-  const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
-  const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
-  //////////////
+  const [questionData, setQuestionData] = useRecoilState(questionDataAtom)
+  const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+  ////
 
   useEffect(() => {
     setInputStep(questionData.step !== '' ? questionData.step : subjectObj[inputSubject].steps[0])
@@ -50,7 +68,7 @@ const QuestionForm = () => {
     reValidateMode: 'onChange'
   })
 
-  ///// 수정 ////
+  ///// 수정 및 빠른추가 ////
   useDeepCompareEffect(() => {
     if(!questionUpdate) return
     setInputSubject(questionData.subject as Subject)
@@ -60,7 +78,7 @@ const QuestionForm = () => {
     setInputMonth(questionData.questionMonth)
     setInputQNumber(questionData.questionNumber)
     questionForm.reset({
-      questionSequence: questionData.questionSequence !== 1 ? questionData.questionSequence : 1,
+      questionSequence: questionData.questionSequence !== 1 ? questionData.questionSequence: 1,
       questionAnswer: questionData.questionAnswer !== 1 ? questionData.questionAnswer : 1,
       questionScore: questionData.questionScore !== 1 ? questionData.questionScore : 1
     })
@@ -88,8 +106,6 @@ const QuestionForm = () => {
     isLoading: isSaving
   } =  useEditQuestion(subjectObj[inputSubject].subject, inputStep, questionUpdateId) //id 는 수정로직
 
-  const navigate = useNavigate()
-  const { id: userId = '' } = useParams()
 
   const OnSave = handleSubmit(form => {
     if(isSaving) return
@@ -121,6 +137,7 @@ const QuestionForm = () => {
     setQuestionData({
       ...questionData,
       step : '',
+      questionSequence : 1,
     })
 
     navigate(`/main/${userId}`)
@@ -261,7 +278,9 @@ const QuestionForm = () => {
                     required
                     label="순서"
                     variant="standard"
+                    value={newQuestionSequence}
                     {...register("questionSequence")}
+                    onChange={(e) => setNewQuestionSequence(Number(e.target.value))}
                     helperText={(
                       <Box
                         component="span"

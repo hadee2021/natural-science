@@ -23,10 +23,7 @@ const MainPrinciple = () => {
   const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
 
 
-
-
   const quickAdd = (step: string) => {
-    //let newQuestionSequence = questionList[questionList.length-1].questionSequence + 1
     setQuestionData({
       id: '',
       subject: tabSubject,
@@ -40,7 +37,7 @@ const MainPrinciple = () => {
       questionScore: 1
     })
     setQuestionUpdate(true) // 수정의 로직 사용
-    navigate(`/main/${userId}/form`)
+    navigate(`/main/${userId}/form/${subjectObj[tabSubject].subject}/${step}`)
   }
 
   return (
