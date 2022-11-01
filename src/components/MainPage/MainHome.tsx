@@ -6,16 +6,21 @@ import { Button } from '@mui/material'
 import { Fab } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
-import { IsQuestionUpdateAtom } from '../../core/Atom'
+import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
 
 const MainHome = () => {
   const { id: userId = '' } = useParams()
   const { user } = useUser(userId)
   const navigate = useNavigate()
 
+  const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
   const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
 
   const goToForm = () => {
+    setQuestionData({
+      ...questionData,
+      step : '',
+    })
     setQuestionUpdate(false) // 수정이 아니다.
     navigate(`/main/${userId}/form`)
   }

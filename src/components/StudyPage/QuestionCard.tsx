@@ -26,7 +26,7 @@ const QuestionCard = ({question}:Props) => {
     ///// 수정 ////
     const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
     const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
-    //////////////
+    
 
   const onUpdate = (question: Question) => {
     setQuestionData({
@@ -45,6 +45,8 @@ const QuestionCard = ({question}:Props) => {
     setQuestionUpdate(true)
     navigate(`/main/${userId}/form`)
   }
+
+  //////////////
 
 
   return (

@@ -34,14 +34,16 @@ const QuestionForm = () => {
   const [inputMonth, setInputMonth] = useState<number>(3)
   const [inputQNumber, setInputQNumber] = useState<number>(1)
 
-  useEffect(() => {
-    setInputStep(subjectObj[inputSubject].steps[0])
-  }, [inputSubject])
+  
 
   ///// 수정 ////
   const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
   const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
   //////////////
+
+  useEffect(() => {
+    setInputStep(questionData.step !== '' ? questionData.step : subjectObj[inputSubject].steps[0])
+  }, [inputSubject])
 
   const questionForm = useForm<Question>({
     mode: 'all',
@@ -115,6 +117,11 @@ const QuestionForm = () => {
     }
 
     editQuestion(nextQuestionForm)
+
+    setQuestionData({
+      ...questionData,
+      step : '',
+    })
 
     navigate(`/main/${userId}`)
   })

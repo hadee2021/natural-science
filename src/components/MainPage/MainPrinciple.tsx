@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { subjectObj } from '../../module/subjectData'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@mui/material'
+import { useRecoilState } from 'recoil'
+import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import { useQuestionList } from '../../core/query'
 
 
 const MainPrinciple = () => {
@@ -13,6 +16,31 @@ const MainPrinciple = () => {
 
   const goToStudy = (step: string) => {
     navigate(`/study/${userId}/${subjectObj[tabSubject].subject}/${step}/${tabSubject}`)
+  }
+
+  //// 빠른추가 ////
+  const [questionData, setQuestionData] = useRecoilState(questionDataAtom)
+  const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+
+
+
+
+  const quickAdd = (step: string) => {
+    //let newQuestionSequence = questionList[questionList.length-1].questionSequence + 1
+    setQuestionData({
+      id: '',
+      subject: tabSubject,
+      step: step,
+      imgSrc: '',
+      questionYear: 2023,
+      questionMonth: 3,
+      questionNumber: 1,
+      questionSequence: 1,
+      questionAnswer: 1,
+      questionScore: 1
+    })
+    setQuestionUpdate(true) // 수정의 로직 사용
+    navigate(`/main/${userId}/form`)
   }
 
   return (
@@ -30,7 +58,7 @@ const MainPrinciple = () => {
             <span onClick={() => goToStudy(step)}>
               {step}
             </span>
-            <Button>
+            <Button onClick={() => quickAdd(step)}>
               빠른 추가
             </Button>
           </div>
