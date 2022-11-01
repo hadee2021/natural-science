@@ -88,6 +88,7 @@ const QuestionForm = () => {
 
   //빠른추가 //
   useEffect(() => {
+    if(!questionQuickAdd) return
     questionForm.reset({
       questionSequence: newQuestionSequence
     })
