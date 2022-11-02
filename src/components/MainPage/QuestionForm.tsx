@@ -79,7 +79,7 @@ const QuestionForm = () => {
     setInputMonth(questionData.questionMonth)
     setInputQNumber(questionData.questionNumber)
     questionForm.reset({
-      questionSequence: questionData.questionSequence !== 1 ? questionData.questionSequence: 1,
+      questionSequence: questionData.questionSequence as number !== 1 ? questionData.questionSequence as number: 1,
       questionAnswer: questionData.questionAnswer !== 1 ? questionData.questionAnswer : 1,
       questionScore: questionData.questionScore !== 1 ? questionData.questionScore : 1
     })
@@ -137,7 +137,7 @@ const QuestionForm = () => {
       questionYear: questionYear,
       questionMonth: questionMonth,
       questionNumber: questionNumber,
-      questionSequence: questionSequence,
+      questionSequence: questionSequence as number,
       questionAnswer: questionAnswer,
       questionScore: questionScore
     }
@@ -147,7 +147,7 @@ const QuestionForm = () => {
     setQuestionData({
       ...questionData,
       step : '',
-      questionSequence : 1,
+      questionSequence : 1 as number,
     })
     setQuestionUpdate(false) // 수정 끝
     setQuestionQuickAdd(false) // 빠른추가 끝

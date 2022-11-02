@@ -10,7 +10,7 @@ export const questionDataAtom = atom({
     questionYear: 2023,
     questionMonth: 3,
     questionNumber: 1,
-    questionSequence: 1,
+    questionSequence: 1 as number,
     questionAnswer: 1,
     questionScore: 1
   }

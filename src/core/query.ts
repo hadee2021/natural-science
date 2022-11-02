@@ -160,6 +160,9 @@ export const useQuestionList = (subject: Subject | string, step: string) => {
     { subscribe: true },
     { enabled: Boolean(step) },
   )
+  questionList.sort((a: { questionSequence: number }, b: { questionSequence: number }) => {
+    return a.questionSequence - b.questionSequence
+  })
 
   return useMemo(() => {
 
