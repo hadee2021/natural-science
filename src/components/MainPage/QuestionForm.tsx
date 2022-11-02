@@ -45,7 +45,7 @@ const QuestionForm = () => {
 
   // 빠른 추가 시퀀스 구하기
   const { questionList } = useQuestionList(subject, step)
-  const [newQuestionSequence, setNewQuestionSequence] = useState(1)
+  const [newQuestionSequence, setNewQuestionSequence] = useState<number>(1)
   const [questionQuickAdd, setQuestionQuickAdd] = useRecoilState(IsQuickAddAtom)
 
   useEffect(() => {
