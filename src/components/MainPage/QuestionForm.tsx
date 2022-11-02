@@ -13,7 +13,7 @@ import { useDeepCompareEffect } from 'use-deep-compare'
 import { useQuestionList } from '../../core/query'
 
 const QuestionForm = () => {
-  /**업로드 */
+  /** 업로드 */
   const [imageUpload, setImageUpload] = useState<any>()
   const [uploadFolderName, setUploadFolderName] = useState('')
   const [imageURL, setImageURL] = useState('')
@@ -28,7 +28,7 @@ const QuestionForm = () => {
     })
   }
 
-  /**문제 제출  */
+  /** 문제 제출  */
   const [inputSubject, setInputSubject] = useState<Subject>('physical')
   const [inputStep, setInputStep] = useState<string>('1단원 역학')
   const [inputYear, setInputYear] = useState<number>(2023)
@@ -43,7 +43,7 @@ const QuestionForm = () => {
     step = '',
   } = useParams()
 
-  ///// 빠른 추가 시퀀스 구하기 ////
+  // 빠른 추가 시퀀스 구하기
   const { questionList } = useQuestionList(subject, step)
   const [newQuestionSequence, setNewQuestionSequence] = useState(1)
   const [questionQuickAdd, setQuestionQuickAdd] = useRecoilState(IsQuickAddAtom)
@@ -53,12 +53,12 @@ const QuestionForm = () => {
       setNewQuestionSequence(questionList.length + 1)
     }
   }, [questionList])
-  ////
+  //
 
-  ///// 수정 ////
+  //수정
   const [questionData, setQuestionData] = useRecoilState(questionDataAtom)
   const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
-  ////
+  //
 
   useEffect(() => {
     setInputStep(questionData.step !== '' ? questionData.step : subjectObj[inputSubject].steps[0])
@@ -69,7 +69,7 @@ const QuestionForm = () => {
     reValidateMode: 'onChange'
   })
 
-  ///// 수정 및 빠른추가 ////
+  // 수정 및 빠른추가
   useDeepCompareEffect(() => {
     if(!questionUpdate) return
     setInputSubject(questionData.subject as Subject)
@@ -84,16 +84,16 @@ const QuestionForm = () => {
       questionScore: questionData.questionScore !== 1 ? questionData.questionScore : 1
     })
   },[questionData])
-  //////////////
+  //
 
-  //빠른추가 //
+  // 빠른추가
   useEffect(() => {
     if(!questionQuickAdd) return
     questionForm.reset({
       questionSequence: newQuestionSequence
     })
   },[newQuestionSequence])
-  ///////////
+  //
 
   const { 
     handleSubmit,
@@ -101,7 +101,7 @@ const QuestionForm = () => {
     register,
   } = questionForm
 
-  ////// 수정 /////
+  // 수정
   let questionUpdateId
   if(questionData.id !== '') {
     questionUpdateId = questionData.id
@@ -109,7 +109,7 @@ const QuestionForm = () => {
   else if(questionData.id === '') {
     questionUpdateId = undefined
   }
-  ////////////////
+  //
 
   const {
     editQuestion,
@@ -290,7 +290,6 @@ const QuestionForm = () => {
                     required
                     label="순서"
                     variant="standard"
-                    // value={newQuestionSequence}
                     {...register("questionSequence")}
                     onChange={(e) => setNewQuestionSequence(Number(e.target.value))}
                     helperText={(
@@ -307,7 +306,6 @@ const QuestionForm = () => {
                 </Tooltip>
               )}
             />
-            {newQuestionSequence}
           </div>
           <div className="score">
             <Controller

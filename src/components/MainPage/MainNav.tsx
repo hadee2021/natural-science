@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 
 interface Props {
   userName: string
@@ -18,6 +20,15 @@ const MainNav = ({userName} : Props) => {
 
   const navigate = useNavigate()
 
+  const [questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+  const [questionQuickAdd, setQuestionQuickAdd] = useRecoilState(IsQuickAddAtom)
+
+  const movePage = (move: string) => {
+    setQuestionUpdate(false)
+    setQuestionQuickAdd(false)
+    navigate(move)
+  }
+
 
   return (
     <MainNavWrapper>
@@ -29,19 +40,19 @@ const MainNav = ({userName} : Props) => {
       </div>
       <div
         className={pathname === `/main/${userId}`? "highlight": ""}
-        onClick={() => navigate(`/main/${userId}`)}
+        onClick={() => movePage(`/main/${userId}`)}
       >
         홈
       </div>
       <div
         className={pathname === `/main/${userId}/review`? "highlight": ""}
-        onClick={() => navigate(`/main/${userId}/review`)}
+        onClick={() => movePage(`/main/${userId}/review`)}
       >
         복습문제
       </div>
       <div
         className={pathname === `/main/${userId}/principle`? "highlight": ""}
-        onClick={() => navigate(`/main/${userId}/principle`)}
+        onClick={() => movePage(`/main/${userId}/principle`)}
       >
         원칙 공부
       </div>
