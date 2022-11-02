@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import OMR from '../OMR'
 import { Button, IconButton } from '@mui/material'
-import { EditOutlined } from '@mui/icons-material'
+import { EditOutlined, Close } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import { useDeleteQuestion } from '../../core/query'
 
 interface Props {
   question: Question
@@ -48,6 +49,17 @@ const QuestionCard = ({question}:Props) => {
 
   //////////////
 
+  // 삭제
+  const {
+    deleteQuestion,
+    isLoading: isDeleting,
+  } = useDeleteQuestion(subject,step,question.id)
+
+  const onDelete = () => {
+    if(isDeleting) return
+    deleteQuestion()
+  }
+
 
   return (
     <QuestionCardWrapper>
@@ -71,6 +83,13 @@ const QuestionCard = ({question}:Props) => {
             onClick={() => onUpdate(question)}
           >
             <EditOutlined fontSize="small"/>
+          </IconButton>
+          <IconButton
+            size="small"
+            onClick={onDelete}
+            sx={{marginLeft : 1}}
+          >
+            <Close fontSize="small"/>
           </IconButton>
         </div>
         <NavBody>

@@ -170,3 +170,25 @@ export const useQuestionList = (subject: Subject | string, step: string) => {
     }
   },[dataUpdatedAt])
 }
+
+/** 문제 삭제 */
+export const useDeleteQuestion = (subject: Subject | string, step: string, questionId = EMPTY_QUESTION_ID) => {
+  const questionDocRef = getQuestionDocRef(subject, step, questionId)
+
+  const {
+    refetch: refetchQuestionList,
+  } = useQuestionList(subject, step)
+  const { mutate, ...result } = useFirestoreDocumentDeletion(questionDocRef, {
+    onSuccess() {
+      refetchQuestionList()
+    }
+  })
+
+  return {
+    ...result,
+    deleteQuestion(options?: Parameters<typeof mutate>[1]) {
+      if(!questionId || questionId === EMPTY_QUESTION_ID) return
+      mutate(undefined, options)
+    }
+  }
+}
