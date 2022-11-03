@@ -25,3 +25,8 @@ export const IsQuickAddAtom = atom({
   key: 'quickAdd',
   default: false
 })
+
+export const ModalImgSrcAtom = atom({
+  key: 'ModalImgSrc',
+  default: ''
+})
