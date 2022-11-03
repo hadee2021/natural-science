@@ -36,7 +36,6 @@ const Study = () => {
 
   const { questionList } = useQuestionList(subject, step)
 
-  console.log('questionList', questionList)
   const navigate = useNavigate()
 
   return (

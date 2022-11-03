@@ -1,7 +1,5 @@
-import React from 'react'
-import { Card, CardContent,
-  IconButton, Box, Typography, Tooltip
-} from '@mui/material'
+import React, { useState } from 'react'
+import { Card, CardContent,IconButton, Box } from '@mui/material'
 import { useEditUser, useUser } from '../../core/query'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -25,11 +23,17 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
   
   const {
     editUser,
-    isLoading: isChecking,
+    isLoading: isDeleting,
   } = useEditUser(userId)
 
   const onDelete = () => {
-
+    if(isDeleting) return
+    let deleteIndex = user.checkQuestion.indexOf(question)
+    user.checkQuestion.splice(deleteIndex, 1)
+    const nextUserForm = {
+      ...user
+    }
+    editUser(nextUserForm)
   }
   // 
 

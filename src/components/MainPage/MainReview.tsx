@@ -1,6 +1,5 @@
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
 import { useUser } from '../../core/query'
 import { groupBy } from 'lodash'
 import { useMemo } from "react"
