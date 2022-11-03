@@ -6,7 +6,8 @@ import { Button, IconButton } from '@mui/material'
 import { EditOutlined, Close } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
-import { useDeleteQuestion } from '../../core/query'
+import { useDeleteQuestion, useEditUser, useUser } from '../../core/query'
+import StarsIcon from '@material-ui/icons/Stars'
 
 interface Props {
   question: Question
@@ -60,6 +61,23 @@ const QuestionCard = ({question}:Props) => {
     deleteQuestion()
   }
 
+  // 체크 문항
+  const { user } = useUser(userId)
+  
+  const {
+    editUser,
+    isLoading: isChecking,
+  } = useEditUser(userId)
+
+  const onCheck = () => {
+    if(isChecking) return
+    user.checkQuestion.push({...question})
+    const nextUserForm = {
+      ...user
+    }
+    editUser(nextUserForm)
+  }
+
 
   return (
     <QuestionCardWrapper>
@@ -91,6 +109,9 @@ const QuestionCard = ({question}:Props) => {
           >
             <Close fontSize="small"/>
           </IconButton>
+          <Button onClick={onCheck}> 
+            <StarsIcon/> 복습 추가
+          </Button>
         </div>
         <NavBody>
           <OMR

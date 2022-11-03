@@ -117,6 +117,22 @@ export const useUser = (userId : string) => {
   }
 }
 
+/** User 체크한 문제 추가 및 삭제*/
+export const useEditUser = (userId: string) => {
+  const userDocId = userId
+  const userDocRef = getUserDocRef(userId)
+
+  const { mutate, ...result } = useFirestoreDocumentMutation(userDocRef, { merge: true })
+
+  return {
+    ...result,
+    userDocId,
+    editUser(userForm: User, options?: Parameters<typeof mutate>[1]) {
+      mutate({ ...userForm }, options)
+    }
+  }
+}
+
 
 /** 문제 추가 및 수정 */
 
