@@ -39,4 +39,18 @@ const MainWrapper = styled.div`
     padding: 30px;
     overflow: auto;
   }
+
+  > div:last-child::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  > div:last-child::-webkit-scrollbar-thumb {
+    background-color: #14a3e6;
+    border-radius: 10px;
+  }
+
+  > div:last-child::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
 `

@@ -122,7 +122,16 @@ export const useEditUser = (userId: string) => {
   const userDocId = userId
   const userDocRef = getUserDocRef(userId)
 
-  const { mutate, ...result } = useFirestoreDocumentMutation(userDocRef, { merge: true })
+  const {
+    refetch: refetchUser
+  } = useUser(userId)
+
+
+  const { mutate, ...result } = useFirestoreDocumentMutation(userDocRef, { merge: true }, {
+    onSuccess() {
+      refetchUser()
+    }
+  })
 
   return {
     ...result,
