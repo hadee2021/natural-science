@@ -8,7 +8,7 @@ const PrivateRoute = () => {
   const { user } = useUser(userId)
 
   return (
-    user.author === true ? <QuestionForm/> : <Navigate to="/"/>
+    user?.author === true ? <QuestionForm/> : <Navigate to="/"/>
   )
 }
 

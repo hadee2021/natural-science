@@ -59,7 +59,7 @@ const MainPrinciple = () => {
             <span onClick={() => goToStudy(step)}>
               {step}
             </span>
-            {user.author &&
+            {user?.author &&
               <Button onClick={() => quickAdd(step)}>
                 빠른 추가
               </Button>
