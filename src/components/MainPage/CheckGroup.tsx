@@ -2,55 +2,12 @@ import React, { useState } from 'react'
 import { Box, Collapse, Typography, IconButton } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
 import styled from 'styled-components'
-import CheckQuestionCard from './CheckQuestionCard'
 import { ModalImgSrcAtom } from '../../core/Atom'
 import { useRecoilState } from 'recoil'
 import { Close } from '@mui/icons-material'
+import CheckGroupBody from './CheckGroupBody'
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 4
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1401 },
-    items: 3
-  },
-  tablet: {
-    breakpoint: { max: 1400, min: 1100 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 1099, min: 0 },
-    items: 1
-  }
-}
-
-interface CheckQuestionListProps {
-  checkQuestionList : Question[]
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-
-const CheckQuestionList = ({checkQuestionList, setOpenModal}: CheckQuestionListProps) => {
-  return (
-    <CarouselContainer>
-      <Carousel responsive={responsive} className="carousel">
-        {checkQuestionList.map((question: Question) => (
-          <CheckQuestionCard
-            key={question.id}
-            question={question}
-            setOpenModal={setOpenModal}
-          />
-        ))}
-      </Carousel>
-    </CarouselContainer>
-  )
-}
 
 interface Props {
   step: string
@@ -69,7 +26,7 @@ const CheckGroup = ({step, checkQuestionList}: Props) => {
   return (
     <>
       <Box>
-        <CheckGroupContainer onClick={() => setOpen(!open)}>
+        <CheckGroupHeader onClick={() => setOpen(!open)}>
           <Box>
             <Typography variant="subtitle1" fontWeight="bold">
               {step}
@@ -79,9 +36,9 @@ const CheckGroup = ({step, checkQuestionList}: Props) => {
             ? <KeyboardArrowUpIcon /> 
             : <KeyboardArrowDownIcon />
           }
-        </CheckGroupContainer>
+        </CheckGroupHeader>
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <CheckQuestionList 
+          <CheckGroupBody
             checkQuestionList={checkQuestionList} 
             setOpenModal={setOpenModal}
           />
@@ -111,7 +68,7 @@ const CheckGroup = ({step, checkQuestionList}: Props) => {
 
 export default CheckGroup
 
-const CheckGroupContainer = styled.div`
+const CheckGroupHeader = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
