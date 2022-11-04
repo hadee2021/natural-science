@@ -8,7 +8,6 @@ declare interface User {
   name: string
   pwd: string
   author: boolean
-  checkQuestion: object[]
 }
 
 declare interface Question {

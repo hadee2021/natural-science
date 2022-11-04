@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Card, CardContent,IconButton, Box } from '@mui/material'
-import { useEditUser, useUser } from '../../core/query'
+import {  useDeleteCheckQuestion } from '../../core/query'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Close } from '@mui/icons-material'
@@ -19,23 +19,17 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
   } = useParams()
 
   // 체크문항 해제
-  const { user } = useUser(userId)
-  
-  const {
-    editUser,
+  const { 
+    deleteCheckQuestion,
     isLoading: isDeleting,
-  } = useEditUser(userId)
+  } = useDeleteCheckQuestion(userId, question.id)
 
-  const onDelete = () => {
+  const onCheckDelete = () => {
     if(isDeleting) return
-    let deleteIndex = user.checkQuestion.indexOf(question)
-    user.checkQuestion.splice(deleteIndex, 1)
-    const nextUserForm = {
-      ...user
-    }
-    editUser(nextUserForm)
+    deleteCheckQuestion()
   }
-  // 
+  //
+
 
   const [modalImgSrc, setModalImgSrc] = useRecoilState(ModalImgSrcAtom)
   const openImg = (imgSrc: string) => {
@@ -55,7 +49,7 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
             </div>
             <IconButton
               size="small"
-              onClick={onDelete}
+              onClick={onCheckDelete}
               sx={{marginLeft : 1}}
             >
               <Close fontSize="small"/>

@@ -6,7 +6,7 @@ import { Button, IconButton } from '@mui/material'
 import { EditOutlined, Close } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
-import { useDeleteQuestion, useEditUser, useUser } from '../../core/query'
+import { useDeleteQuestion, useAddCheckQuestion } from '../../core/query'
 import StarsIcon from '@material-ui/icons/Stars'
 
 interface Props {
@@ -25,9 +25,9 @@ const QuestionCard = ({question}:Props) => {
   const [omrMarking, setOmrMarking] = useState<boolean[]>([false, false, false, false, false])
   const [showAnswer, setShowAnwser] = useState<boolean>(false)
 
-    ///// 수정 ////
-    const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
-    const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
+  // 수정
+  const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
+  const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
     
 
   const onUpdate = (question: Question) => {
@@ -47,8 +47,7 @@ const QuestionCard = ({question}:Props) => {
     setQuestionUpdate(true)
     navigate(`/main/${userId}/form`)
   }
-
-  //////////////
+  //
 
   // 삭제
   const {
@@ -62,20 +61,14 @@ const QuestionCard = ({question}:Props) => {
   }
 
   // 체크 문항
-  const { user } = useUser(userId)
-  
-  const {
-    editUser,
-    isLoading: isChecking,
-  } = useEditUser(userId)
+  const { 
+    addCheckQuestion,
+    isLoading: isAdding
+  } = useAddCheckQuestion(userId, question.id)
 
   const onCheck = () => {
-    if(isChecking) return
-    user.checkQuestion.push({...question})
-    const nextUserForm = {
-      ...user
-    }
-    editUser(nextUserForm)
+    if(isAdding) return
+    addCheckQuestion({...question})
   }
 
 

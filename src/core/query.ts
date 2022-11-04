@@ -17,6 +17,7 @@ import { groupBy } from 'lodash'
 const ROOT_USER = 'users'
 const userConverter = getDefaultConverter<User>()
 const EMPTY_USER_ID = 'EMPTY_USER_ID'
+const CHECK_QUESTION_LIST = '체크한 문제'
 
 const ROOT_QUESTION = 'questions'
 const questionConverter = getDefaultConverter<Question>()
@@ -33,6 +34,25 @@ const getUserCollectionRef = () => (
 const getUserDocRef = (userId: string) => (
   doc(fireStore, ROOT_USER, userId || EMPTY_USER_ID).withConverter(userConverter)
 )
+
+const getUserCheckCollectionRef = (userId: string) => {
+  return collection(
+    fireStore,
+    ROOT_USER,
+    userId || EMPTY_USER_ID,
+    CHECK_QUESTION_LIST
+  )
+}
+
+const getUserCheckDocRef = (userId: string, questionId: string) => {
+  return doc(
+    fireStore,
+    ROOT_USER,
+    userId || EMPTY_USER_ID,
+    CHECK_QUESTION_LIST,
+    questionId || EMPTY_QUESTION_ID
+  )
+}
 
 const getQuestionCollectionRef = (subject: Subject | string, step: string) => {
   return collection(
@@ -73,8 +93,7 @@ export const useCreateUser = () => {
         id: userId,
         name: userName,
         pwd: hash(userPwd),
-        author: false,
-        checkQuestion: []
+        author: false
       })
     },
   }
@@ -117,45 +136,95 @@ export const useUser = (userId : string) => {
   }
 }
 
-/** User 체크한 문제 추가 및 삭제*/
-export const useEditUser = (userId: string) => {
-  const userDocId = userId
-  const userDocRef = getUserDocRef(userId)
+/** User 체크한 문제 추가 */
+
+export const useAddCheckQuestion = (userId: string, questionId: string) => {
+  const checkDocRef = getUserCheckDocRef(userId, questionId)
+
+  const { mutate, ...result } = useFirestoreDocumentMutation(checkDocRef, { merge: true })
+
+  return {
+    ...result,
+    questionId,
+    addCheckQuestion(questionForm: Question, options?: Parameters<typeof mutate>[1]) {
+      mutate({ ...questionForm, id: questionId}, options)
+    }
+  }
+}
+/** User 체크한 문제 가져오기 */
+
+export const useCheckQuestionList = (userId: string) => {
+  const checkCollectionRef = getUserCheckCollectionRef(userId)
+
+  const constraints: QueryConstraint[] = []
+  constraints.push(orderBy('questionNumber', 'asc'))
+  const queryConstraints = constraints
+
+  const ref = query(
+    checkCollectionRef,
+    ...queryConstraints
+  )
 
   const {
-    refetch: refetchUser
-  } = useUser(userId)
+    data: checkQuestionList = [],
+    dataUpdatedAt,
+    ...result
+  } = useFirestoreQueryData(
+    [ROOT_USER, userId, CHECK_QUESTION_LIST],
+    ref,
+    { subscribe: true },
+    { enabled: Boolean(userId) },
+  )
 
+  return useMemo(() =>{
+    return {
+      checkQuestionList,
+      dataUpdatedAt,
+      ...result,
+    }
+  },[dataUpdatedAt])
+}
 
-  const { mutate, ...result } = useFirestoreDocumentMutation(userDocRef, { merge: true }, {
+/** User 체크한 문제 삭제 */
+
+export const useDeleteCheckQuestion = (userId: string, questionId: string) => {
+  const checkDocRef = getUserCheckDocRef(userId, questionId)
+
+  const {
+    refetch: refetchCheckQuestionList
+  } = useCheckQuestionList(userId)
+
+  const { mutate, ...result } = useFirestoreDocumentDeletion(checkDocRef, {
     onSuccess() {
-      refetchUser()
+      refetchCheckQuestionList()
     }
   })
 
   return {
     ...result,
-    userDocId,
-    editUser(userForm: User, options?: Parameters<typeof mutate>[1]) {
-      mutate({ ...userForm }, options)
+    deleteCheckQuestion(options?: Parameters<typeof mutate>[1]) {
+      if(!questionId || questionId === EMPTY_QUESTION_ID) return
+      mutate(undefined, options)
     }
   }
+
 }
+
 
 
 /** 문제 추가 및 수정 */
 
 export const useEditQuestion = (subject: Subject | string, step: string, questionId?: string) => {
-  const qustionDocId = questionId  ?? nanoid(5)
-  const questionDocRef = getQuestionDocRef(subject, step, qustionDocId)
+  const questionDocId = questionId  ?? nanoid(5)
+  const questionDocRef = getQuestionDocRef(subject, step, questionDocId)
 
   const { mutate, ...result } = useFirestoreDocumentMutation(questionDocRef, { merge: true })
 
   return {
     ...result,
-    qustionDocId,
+    questionDocId,
     editQuestion (questionForm: Question, options?: Parameters<typeof mutate>[1]) {
-      mutate({ ...questionForm, id: qustionDocId}, options)
+      mutate({ ...questionForm, id: questionDocId}, options)
     }
   }
 }
