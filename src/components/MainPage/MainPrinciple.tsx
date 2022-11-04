@@ -75,6 +75,14 @@ export default MainPrinciple
 
 const PrincipleWrapper = styled.div`
 
+@media screen and (max-width: 768px) {
+  font-size: 15px;
+}
+
+@media screen and (max-width: 560px) {
+  font-size: 13px;
+}
+
 `
 
 const PrincipleHeader = styled.div`
@@ -87,6 +95,16 @@ const PrincipleHeader = styled.div`
     border: 1px solid orangered;
     border-radius: 10px;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 560px) {
+    margin: 15px 0;
+    overflow-x: auto;
+
+    > div {
+      margin: 0 10px;
+      padding: 5px 10px;
+    }
   }
 `
 

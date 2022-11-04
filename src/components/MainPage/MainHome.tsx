@@ -66,6 +66,7 @@ const MainHomeWrapper = styled.div`
     font-size: 25px;
     text-align: center;
     margin-top: 30px;
+    margin-bottom: 65px;
   }
   .logout {
     display: flex;
@@ -73,6 +74,17 @@ const MainHomeWrapper = styled.div`
     width: 340px;
     margin: 0 auto;
     margin-top: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    .logout {
+      width: 250px;
+    }
+  }
+
+  @media screen and (max-width: 495px) {
+    .logout {
+      width: 200px;
+    }
   }
 `
 
@@ -88,5 +100,18 @@ const Descript = styled.div`
   line-height: 1.7;
   font-size: 16px;
   margin: 0 auto;
-  margin-top: 65px;
+
+  @media screen and (max-width: 768px) {
+    width: 200px;
+    min-height: 87px;
+    font-size: 11px;
+    line-height: 2;
+  }
+
+  @media screen and (max-width: 495px) {
+    width: 165px;
+    min-height: 87px;
+    font-size: 10px;
+    line-height: 2;
+  }
 `

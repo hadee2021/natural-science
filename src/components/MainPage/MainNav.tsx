@@ -92,4 +92,16 @@ const MainNavWrapper = styled.div`
       align-self: center;
     }
   }
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
+    min-width: 150px;
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: 560px) {
+    width: 100px;
+    min-width: 100px;
+    font-size: 13px;
+  }
 `

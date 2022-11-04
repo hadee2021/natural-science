@@ -53,4 +53,9 @@ const MainWrapper = styled.div`
     border-radius: 10px;
   }
 
+  @media screen and (max-width: 768px) {
+    > div:last-child {
+      padding: 15px;
+    }
+  }
 `
