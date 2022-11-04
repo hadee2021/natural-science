@@ -56,7 +56,7 @@ const Start = () => {
   })
 
   const goToDemo = () => {
-    navigate(`/main/ssss`, { replace: true })
+    navigate(`/main/2rvUM`, { replace: true })
   }
 
   const [tab, setTab] = useState('')
@@ -86,7 +86,9 @@ const Start = () => {
               </DemoDescript>
             </Box>
             <TabMenu>
-              <div>
+              <div
+                onClick={() => goToDemo()}
+              >
                 시연하기
               </div>
               <div
@@ -97,8 +99,7 @@ const Start = () => {
             </TabMenu>
           </>
         }
-        {
-          tab === 'login' &&
+        { tab === 'login' &&
           <>
             <span
               onClick={() => setTab('')}

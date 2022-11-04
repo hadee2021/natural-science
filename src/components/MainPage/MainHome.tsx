@@ -40,19 +40,21 @@ const MainHome = () => {
         </span>
       </Descript>
       <div className="logout">
-        <Button onClick={ () => { navigate('/')} }>로그아웃</Button>
+        <Button onClick={ () => navigate('/') }>로그아웃</Button>
       </div>
-      <Fab
-        color="primary"
-        sx={{
-          position :"fixed",
-          right: 20,
-          bottom: 20
-        }}
-        onClick={() => goToForm()}
-      >
-        <Add fontSize="large" />
-      </Fab>
+      {user?.author &&
+        <Fab
+          color="primary"
+          sx={{
+            position :"fixed",
+            right: 20,
+            bottom: 20
+          }}
+          onClick={() => goToForm()}
+        >
+          <Add fontSize="large" />
+        </Fab>
+      }
     </MainHomeWrapper>
   )
 }

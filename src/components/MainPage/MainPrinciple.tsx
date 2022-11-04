@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
-import { useQuestionList } from '../../core/query'
+import { useUser } from '../../core/query'
 
 
 const MainPrinciple = () => {
@@ -42,6 +42,8 @@ const MainPrinciple = () => {
     navigate(`/main/${userId}/form/${subjectObj[tabSubject].subject}/${step}`)
   }
 
+  const { user } = useUser(userId)
+
   return (
     <PrincipleWrapper>
       <PrincipleHeader>
@@ -57,9 +59,11 @@ const MainPrinciple = () => {
             <span onClick={() => goToStudy(step)}>
               {step}
             </span>
-            <Button onClick={() => quickAdd(step)}>
-              빠른 추가
-            </Button>
+            {user.author &&
+              <Button onClick={() => quickAdd(step)}>
+                빠른 추가
+              </Button>
+            }
           </div>
         ))}
       </PrincipleList>

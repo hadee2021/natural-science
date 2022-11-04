@@ -1,10 +1,14 @@
 import React from 'react'
 import QuestionForm from '../components/MainPage/QuestionForm'
-import { Navigate } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
+import { useUser } from '../core/query'
 
 const PrivateRoute = () => {
+  const { id: userId = '' } = useParams()
+  const { user } = useUser(userId)
+
   return (
-    true ? <QuestionForm/> : <Navigate to="/"/>
+    user.author === true ? <QuestionForm/> : <Navigate to="/"/>
   )
 }
 

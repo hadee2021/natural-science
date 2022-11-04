@@ -6,7 +6,7 @@ import { Button, IconButton } from '@mui/material'
 import { EditOutlined, Close } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
-import { useDeleteQuestion, useAddCheckQuestion } from '../../core/query'
+import { useDeleteQuestion, useAddCheckQuestion, useUser } from '../../core/query'
 import StarsIcon from '@material-ui/icons/Stars'
 
 interface Props {
@@ -71,6 +71,9 @@ const QuestionCard = ({question}:Props) => {
     addCheckQuestion({...question})
   }
 
+  // 권한
+  const { user } = useUser(userId)
+
 
   return (
     <QuestionCardWrapper>
@@ -79,8 +82,8 @@ const QuestionCard = ({question}:Props) => {
           <span>{question.questionYear} 학년도 </span>
           <span>{question.questionMonth} 월</span>
           <span>
-            {question.questionMonth === 11 ? "수능"
-              : question.questionMonth === 6 || 9 ? "평가원" : "교육청"
+            {question.questionMonth === 11 || "11" ? "수능"
+              : question.questionMonth === 6 || "6" || 9 || "9" ? "평가원" : "교육청"
             }
           </span>
           <span>{question.questionNumber} 번</span>
@@ -88,20 +91,6 @@ const QuestionCard = ({question}:Props) => {
       </CardHeader>
       <CardNav>
         <div className="space">
-          <IconButton
-            size="small" 
-            color="secondary"
-            onClick={() => onUpdate(question)}
-          >
-            <EditOutlined fontSize="small"/>
-          </IconButton>
-          <IconButton
-            size="small"
-            onClick={onDelete}
-            sx={{marginLeft : 1}}
-          >
-            <Close fontSize="small"/>
-          </IconButton>
           <Button onClick={onCheck}> 
             <StarsIcon/> 복습 추가
           </Button>
@@ -128,6 +117,24 @@ const QuestionCard = ({question}:Props) => {
           </div>
         </NavBody>
       </CardNav>
+      {user?.author &&
+        <CardAdminNav>
+          <IconButton
+            size="small" 
+            color="secondary"
+            onClick={() => onUpdate(question)}
+          >
+            <EditOutlined fontSize="small"/>
+          </IconButton>
+          <IconButton
+            size="small"
+            onClick={onDelete}
+            sx={{marginLeft : 1}}
+          >
+            <Close fontSize="small"/>
+          </IconButton>
+        </CardAdminNav>
+      }
       <CardBody>
         <img src={question.imgSrc}/>
       </CardBody>
@@ -145,6 +152,13 @@ const CardHeader = styled.div`
   justify-content: center;
   margin-bottom: 20px;
   font-size: 20px;
+
+  > div {
+    color: #2F74C0;
+    > span {
+      margin: 0 5px;
+    }
+  }
 `
 
 const CardNav = styled.div`
@@ -155,6 +169,13 @@ const CardNav = styled.div`
     width: 45%;
   }
 `
+const CardAdminNav = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 80%;
+  margin: 0 auto;
+`
+
 const NavBody = styled.div`
   display: flex;
   justify-content: space-between;

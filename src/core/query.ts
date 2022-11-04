@@ -175,6 +175,9 @@ export const useCheckQuestionList = (userId: string) => {
     { subscribe: true },
     { enabled: Boolean(userId) },
   )
+  checkQuestionList.sort((a: { questionNumber: number }, b: { questionNumber: number }) => {
+    return a.questionNumber - b.questionNumber
+  })
 
   return useMemo(() =>{
     return {
