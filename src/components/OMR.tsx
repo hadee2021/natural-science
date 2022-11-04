@@ -75,4 +75,9 @@ const OMRWrapper = styled.div`
     background-color: black;
     color: black;
   }
+
+  @media screen and (max-width: 520px) {
+    width: 120px;
+    font-size: 14px;
+  }
 `

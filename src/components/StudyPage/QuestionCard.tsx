@@ -78,7 +78,7 @@ const QuestionCard = ({question}:Props) => {
   return (
     <QuestionCardWrapper>
       <CardHeader>
-        <div>
+        <div className="question-title">
           <span>{question.questionYear} 학년도 </span>
           <span>{question.questionMonth} 월</span>
           <span>
@@ -87,6 +87,24 @@ const QuestionCard = ({question}:Props) => {
             }
           </span>
           <span>{question.questionNumber} 번</span>
+        </div>
+        <div className="answer-confirm">
+          <Button
+            variant="contained"
+            disabled={!(omrMarking.some((_) =>_))}
+            onClick={() => setShowAnwser(true)}
+            size="small" 
+          >
+            정답 확인
+          </Button>
+          <div className="answer-div">
+            답 :
+            {showAnswer && (omrMarking.some((_) =>_)) &&
+              <span className="answer">
+              {question.questionAnswer}
+            </span>
+            }
+          </div>
         </div>
       </CardHeader>
       <CardNav>
@@ -100,21 +118,6 @@ const QuestionCard = ({question}:Props) => {
             omrMarking={omrMarking}
             setOmrMarking={setOmrMarking}
           />
-          <Button
-            variant="contained"
-            disabled={!(omrMarking.some((_) =>_))}
-            onClick={() => setShowAnwser(true)}
-          >
-            정답 확인
-          </Button>
-          <div className="answer-div">
-            답 :
-            {showAnswer && (omrMarking.some((_) =>_)) &&
-              <span className="answer">
-              {question.questionAnswer}
-            </span>
-            }
-          </div>
         </NavBody>
       </CardNav>
       {user?.author &&
@@ -153,12 +156,50 @@ const CardHeader = styled.div`
   margin-bottom: 20px;
   font-size: 20px;
 
-  > div {
+  .question-title {
     color: #2F74C0;
     > span {
       margin: 0 5px;
     }
   }
+
+  .answer-confirm {
+    display: flex;
+    margin-left: 20px;
+    gap: 20px;
+  }
+
+  .answer-div {
+    align-self: center;
+    font-size: 15px;
+  }
+
+  .answer {
+    margin: 0 10px;
+    border: 1px solid black;
+    padding: 0px 6px;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
+
+  
+  @media screen and (max-width: 768px) {
+    .question-title {
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    flex-flow: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  @media screen and (max-width: 520px) {
+    margin-bottom: 5px;
+  }
+
 `
 
 const CardNav = styled.div`
@@ -168,6 +209,27 @@ const CardNav = styled.div`
   .space {
     width: 45%;
   }
+  
+  @media screen and (max-width: 1024px) {
+    .space {
+      width: 40%;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .space {
+      width: 38%;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    flex-flow: column;
+    align-items: center;
+    .space {
+      width: 120px;
+    }
+  }
+
 `
 const CardAdminNav = styled.div`
   display: flex;
@@ -181,21 +243,30 @@ const NavBody = styled.div`
   justify-content: space-between;
   width: 400px;
 
-  .answer-div {
-    align-self: center;
-  }
-
-  .answer {
-    margin: 0 10px;
-    border: 1px solid black;
-    padding: 0px 6px;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
+  @media screen and (max-width: 520px) {
+    justify-content: center;
   }
 `
 
 const CardBody = styled.div`
   display: flex;
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    img {
+      width: 400px;
+    }
+  }
+
+  @media screen and (max-width: 520px) {
+    img {
+      width: 300px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    img {
+      width: 250px;
+    }
+  }
 `
