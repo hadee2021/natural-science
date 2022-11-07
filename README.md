@@ -55,7 +55,7 @@ Link:
 
 ![003 원칙공부](https://user-images.githubusercontent.com/85422934/200259839-887dc7ef-9587-4a74-be2e-936d58667ef6.png)
 
-과목과 테마별를 선택 할 수 있습니다.
+과목과 테마 선택 할 수 있습니다.
 
 
 ### 문제학습
