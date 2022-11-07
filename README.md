@@ -21,7 +21,7 @@ Link:
 ![Netlify Status](https://api.netlify.com/api/v1/badges/f15f03f9-55d8-4adc-97d5-f6e085141610/deploy-status)
 
 ---
-## 개요
+##  개요
 
 수능 과학탐구 서비스는 학생과 관리자 관점을 분리하여 만들었습니다.
 
