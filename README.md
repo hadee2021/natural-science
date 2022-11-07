@@ -22,3 +22,23 @@ Link:
 
 ---
 ## 사용 방법
+
+
+### 시연하기
+
+![001 처음 화면](https://user-images.githubusercontent.com/85422934/200259413-62ed0a5c-6df3-48bf-a32a-23656b9b5e08.png)
+
+처음 이용하는 사람을 위해 시연하기 버튼이 있습니다.
+
+자신의 학습공간이 있으면 스터디룸으로 입장하시면 됩니다.
+
+
+
+### 홈 화면
+
+![002 홈](https://user-images.githubusercontent.com/85422934/200259702-33342e03-de3f-45c2-bb03-8bd5eadf7627.png)
+
+
+간단한 설명과 로그아웃 버튼
+
+
