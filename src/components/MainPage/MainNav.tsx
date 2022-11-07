@@ -104,4 +104,10 @@ const MainNavWrapper = styled.div`
     min-width: 100px;
     font-size: 13px;
   }
+
+  @media screen and (max-width: 450px) {
+    width: 80px;
+    min-width: 80px;
+    font-size: 13px;
+  }
 `

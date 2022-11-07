@@ -86,6 +86,12 @@ const MainHomeWrapper = styled.div`
       width: 200px;
     }
   }
+
+  @media screen and (max-width: 410px) {
+    .logout {
+      width: 130px;
+    }
+  }
 `
 
 const Descript = styled.div`
@@ -113,5 +119,10 @@ const Descript = styled.div`
     min-height: 87px;
     font-size: 10px;
     line-height: 2;
+  }
+
+  @media screen and (max-width: 410px) {
+    width: 100px;
+    font-size: 10px;
   }
 `

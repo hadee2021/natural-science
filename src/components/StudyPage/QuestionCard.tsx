@@ -222,7 +222,7 @@ const CardNav = styled.div`
     }
   }
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 550px) {
     flex-flow: column;
     align-items: center;
     .space {
@@ -236,6 +236,9 @@ const CardAdminNav = styled.div`
   justify-content: flex-end;
   width: 80%;
   margin: 0 auto;
+  @media screen and (max-width: 520px) {
+    width: 60%;
+  }
 `
 
 const NavBody = styled.div`
@@ -243,7 +246,7 @@ const NavBody = styled.div`
   justify-content: space-between;
   width: 400px;
 
-  @media screen and (max-width: 520px) {
+  @media screen and (max-width: 550px) {
     justify-content: center;
   }
 `

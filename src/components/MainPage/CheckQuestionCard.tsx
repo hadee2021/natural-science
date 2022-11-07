@@ -43,9 +43,13 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
         <CardContent>
           <CardHeader>
             <div className="number-title">
-              <span>{question.questionYear} 학년도 </span>
-              <span>{question.questionMonth} 월</span>
-              <span>{question.questionNumber} 번</span>
+              <div>
+                <span>{question.questionYear} 학년도 </span>
+              </div>
+              <div>
+                <span>{question.questionMonth} 월</span>
+                <span>{question.questionNumber} 번</span>
+              </div>
             </div>
             <IconButton
               size="small"
@@ -84,6 +88,55 @@ const CardContainer = styled.div`
     padding: 5px;
     border-radius: 10px;
   }
+  .number-title {
+    align-self: center;
+    display: flex;
+    gap: 5px;
+
+    > div > span {
+      margin: 0 3px;
+    }
+  }
+
+  @media screen and (max-width: 620px) {
+    .question-card {
+      width: 250px;
+      height: 300px;
+    }
+    .number-title {
+      font-size: 15px;
+    }
+    .question-mini-img {
+      width: 200px;
+    }
+  }
+
+  @media screen and (max-width: 490px) {
+    .question-card {
+      width: 200px;
+      height: 250px;
+    }
+    .number-title {
+      font-size: 10px;
+    }
+    .question-mini-img {
+      width: 150px;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    .question-card {
+      width: 150px;
+      height: 200px;
+    }
+    .number-title {
+      font-size: 10px;
+      flex-flow: column;
+    }
+    .question-mini-img {
+      width: 100px;
+    }
+  }
 `
 
 const CardHeader = styled.div`
@@ -92,12 +145,4 @@ const CardHeader = styled.div`
   padding-bottom: 10px;
   color: #2F74C0;
   margin-bottom: 10px;
-
-  .number-title {
-    align-self: center;
-
-    > span {
-      margin: 0 3px;
-    }
-  }
 `

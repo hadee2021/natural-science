@@ -27,7 +27,7 @@ const CheckGroup = ({step}: Props) => {
       <Box>
         <CheckGroupHeader onClick={() => setOpen(!open)}>
           <Box>
-            <Typography variant="subtitle1" fontWeight="bold">
+            <Typography variant="subtitle1" fontWeight="bold" className="step-header">
               {step}
             </Typography>
           </Box>
@@ -75,14 +75,27 @@ const CheckGroupHeader = styled.div`
   padding: 10px 25px;
   margin: 25px 0;
   border-radius: 10px;
+
+  > div:first-child {
+    align-self: center;
+  }
+
+  @media screen and (max-width: 520px) {
+    padding: 8px 20px;
+    .step-header{
+      font-size: 15px;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    padding: 4px 15px;
+    .step-header{
+      font-size: 10px;
+    }
+  }
+  
 `
 
-const CarouselContainer = styled.div`
-  .carousel > ul > li{
-    display: flex;
-    justify-content: center;
-  }
-`
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -104,5 +117,17 @@ const ModalBody = styled.div`
   .close-btn {
     align-self: flex-end;
     margin-bottom: 10px;
+  }
+
+  @media screen and (max-width: 520px) {
+    img {
+      width: 400px;
+    }
+  }
+
+  @media screen and (max-width: 420px) {
+    img {
+      width: 300px;
+    }
   }
 `
