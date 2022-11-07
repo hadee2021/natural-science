@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import styled from 'styled-components'
 import CheckQuestionCard from './CheckQuestionCard'
+import { checkQuestionListContext } from '../../module/questionContext'
 
 const responsive = {
   superLargeDesktop: {
@@ -25,11 +26,11 @@ const responsive = {
 }
 
 interface Props {
-  checkQuestionList : Question[]
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CheckGroupBody = ({checkQuestionList, setOpenModal}: Props) => {
+const CheckGroupBody = ({ setOpenModal}: Props) => {
+  const checkQuestionList = useContext(checkQuestionListContext)
   return (
     <CarouselContainer>
       <Carousel responsive={responsive} className="carousel">

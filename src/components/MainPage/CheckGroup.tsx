@@ -11,10 +11,9 @@ import CheckGroupBody from './CheckGroupBody'
 
 interface Props {
   step: string
-  checkQuestionList: Question[]
 }
 
-const CheckGroup = ({step, checkQuestionList}: Props) => {
+const CheckGroup = ({step}: Props) => {
   const [open, setOpen] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [modalImgSrc, setModalImgSrc] = useRecoilState(ModalImgSrcAtom)
@@ -39,7 +38,6 @@ const CheckGroup = ({step, checkQuestionList}: Props) => {
         </CheckGroupHeader>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <CheckGroupBody
-            checkQuestionList={checkQuestionList} 
             setOpenModal={setOpenModal}
           />
         </Collapse>
