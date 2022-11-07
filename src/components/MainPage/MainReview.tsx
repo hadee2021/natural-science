@@ -28,9 +28,8 @@ const MainReview = () => {
   return (
     <div>
       {checkStepEntries.map(([step, checkQuestionList]) => (
-        <checkQuestionListContext.Provider value={checkQuestionList as Question[]}>
+        <checkQuestionListContext.Provider value={checkQuestionList as Question[]} key={step}>
           <CheckGroup
-            key={step}
             step={step}
           />
         </checkQuestionListContext.Provider>
