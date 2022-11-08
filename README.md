@@ -24,13 +24,15 @@ Link:
 ## Design
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
-**사용 근거** : 
+**사용 근거** : 버튼, 아이콘, 등의 스타일을 제공하는 라이브러리를 사용하여 CSS의 의존도를 낮추었습니다.
 
+## Backend/Hosting
 
-![CSS3](https://img.shields.io/badge/-CSS3-007ACC?style=for-the-badge&logo=css3)
-
-### Backend/Hosting
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+
+**사용 근거** : 학생과 문제의 정보를 collection과 document 구조를 활용하여 세부적으로 나누고 직관적으로 관리할 수 있어서 사용하였습니다.
+또한 소켓통신을 기반으로 하기에 정보의 변화가 실시간으로 반영 됩니다.
+
 ![Netlify Status](https://api.netlify.com/api/v1/badges/f15f03f9-55d8-4adc-97d5-f6e085141610/deploy-status)
 
 ---
