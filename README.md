@@ -35,6 +35,10 @@ Link:
 
 ![Netlify Status](https://api.netlify.com/api/v1/badges/f15f03f9-55d8-4adc-97d5-f6e085141610/deploy-status)
 
+**사용 근거** : 서비스 런칭에 앞서 베타버전으로 서비스를 오픈 하기 위해 netlify를 사용하였습니다. 
+
+실제 서비스는 firebase hosting을 생각하고 있습니다
+
 ---
 ##  개요
 
