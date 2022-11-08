@@ -9,11 +9,20 @@ Link:
 ## 개발 환경
 ### Core Framework
 ![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
+**사용 근거** : 훅을 이용하여 상태관리를 하고 여러페이지를 부드럽게 구현 할 수 있어서 사용하였습니다. 
+
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+**사용 근거** : 유저정보, 문제정보 처럼 주요한 상태정보는 타입을 정하여 오류가 나타나는것을 미리방지하고
+미리 만들어둔 query의 함수는 어느 컴포넌트에서 사용을 하더라도 인자에 무엇을 넣을지 타입을 알려주기 때문에 매우 편했습니다.
+
 ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
+**사용 근거** : firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing을 활용하면 중복된 요청을 피할 수 있어서 속도의 이득을 보기위해 사용했습니다.
 
 ### Design
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
+**사용 근거** : 
+
+
 ![CSS3](https://img.shields.io/badge/-CSS3-007ACC?style=for-the-badge&logo=css3)
 
 ### Backend/Hosting
