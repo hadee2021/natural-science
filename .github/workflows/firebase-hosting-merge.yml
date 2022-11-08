@@ -34,6 +34,7 @@ jobs:
           REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY}}
         run: |
           echo "REACT_APP_API_KEY=$REACT_APP_API_KEY" >> .env
+          echo "NPM_FLAGS=--force" >> .env
           cat .env
       # Build
       - run: npm ci && npm run build
