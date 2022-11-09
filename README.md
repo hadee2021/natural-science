@@ -35,13 +35,9 @@ Link: https://natural-science-a2e20.web.app/
 
 **사용 근거** : 학생과 문제의 정보를 collection과 document 구조를 활용하여 세부적으로 나누고 직관적으로 관리할 수 있어서 사용하였습니다.
 
-또한 소켓통신을 기반으로 하기에 정보의 변화가 실시간으로 반영 됩니다.
+소켓통신을 기반으로 하기에 정보의 변화가 실시간으로 반영 됩니다.
 
-![Netlify Status](https://api.netlify.com/api/v1/badges/f15f03f9-55d8-4adc-97d5-f6e085141610/deploy-status)
-
-**사용 근거** : 서비스 런칭에 앞서 베타버전으로 서비스를 오픈 하기 위해 netlify를 사용하였습니다. 
-
-실제 서비스는 firebase hosting을 생각하고 있습니다
+깃 허브에 push하고 action에서 버튼을 클릭하면 firebase에 자동 배포가 됩니다.
 
 ---
 ##  개요
