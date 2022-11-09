@@ -1,6 +1,6 @@
-# 수능 물리 화학 공부
+# 수능 과탐 공부
 ## Objective
-Link: 
+Link: https://natural-science-a2e20.web.app/
 
 수능을 공부하는 학생들을 위해 기출문제와 원칙을 학습할 수 있는
 서비스를 개발 하였습니다.
