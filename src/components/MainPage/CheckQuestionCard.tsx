@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import React, { useState } from 'react'
 import { Card, CardContent,IconButton, Box } from '@mui/material'
 import {  useDeleteCheckQuestion } from '../../core/query'

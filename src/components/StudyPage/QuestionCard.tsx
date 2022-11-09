@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -82,11 +83,11 @@ const QuestionCard = ({question}:Props) => {
           <span>{question.questionYear} 학년도 </span>
           <span>{question.questionMonth} 월</span>
           <span>
-            {question.questionMonth === 11 || "11" ? "수능"
-              : question.questionMonth === 6 || "6" || 9 || "9" ? "평가원" : "교육청"
+            {question.questionMonth === ( 11 || "11" ) ? "수능" 
+              : question.questionMonth === ( 6 || "6" || 9 || "9" ) ? "평가원" : "교육청"
             }
           </span>
-          <span>{question.questionNumber} 번</span>
+          <span>{question.questionNumber} 번 </span>
         </div>
         <div className="answer-confirm">
           <Button

@@ -16,7 +16,7 @@ const MainReview = () => {
     checkQuestionList
   } = useCheckQuestionList(userId)
 
-  let checkObj = groupBy(checkQuestionList, 'step')
+  const checkObj = groupBy(checkQuestionList, 'step')
   const checkStepEntries = useMemo(
     () => Object.entries(checkObj),
     [[...checkQuestionList]]

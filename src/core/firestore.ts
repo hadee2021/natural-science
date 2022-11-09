@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import { initializeApp } from "firebase/app"
 import { getFirestore, QueryDocumentSnapshot, SnapshotOptions } from "firebase/firestore"
 import { getAnalytics } from "firebase/analytics"
