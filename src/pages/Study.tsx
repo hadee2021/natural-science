@@ -68,6 +68,17 @@ const StudyWrapper = styled.div`
   background-color: aliceblue;
   height: 100vh;
   display: flex;
+  
+  > div:first-child::-webkit-scrollbar {
+    width: 10px;
+  }
+  > div:first-child::-webkit-scrollbar-thumb {
+    background-color: #14a3e6;
+    border-radius: 10px;
+  }
+  > div:first-child::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
 `
 
 const StudyContainer = styled.div`
