@@ -14,9 +14,9 @@ Link: https://natural-science-a2e20.web.app/
 
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-**사용 근거** : 유저정보, 문제정보 처럼 주요한 상태정보는 타입을 정하여 오류가 나타나는것을 미리방지하고
+**사용 근거** : 유저정보, 문제정보 처럼 주요한 상태정보는 타입을 정하여 오류를 미리방지하고
 
-미리 만들어둔 query의 함수는 어느 컴포넌트에서 사용을 하더라도 인자에 무엇을 넣을지 타입을 알려주기 때문에 매우 편했습니다.
+미리 만들어둔 모듈의 함수는 어느 컴포넌트에서 사용을 하더라도 인자에 무엇을 넣을지 타입을 알려주기 때문에 매우 편했습니다.
 
 ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
 
