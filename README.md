@@ -63,7 +63,7 @@ Link: https://natural-science-a2e20.web.app/
 ### 처음화면
 
 ![001 처음 화면](https://user-images.githubusercontent.com/85422934/200259413-62ed0a5c-6df3-48bf-a32a-23656b9b5e08.png)
-<br/>
+<br/><br/> 
 
 처음 이용하는 사람을 위해 시연하기 버튼이 있습니다.
 
@@ -73,7 +73,7 @@ Link: https://natural-science-a2e20.web.app/
 ### 홈
 
 ![002 홈](https://user-images.githubusercontent.com/85422934/200259702-33342e03-de3f-45c2-bb03-8bd5eadf7627.png)
-<br/>
+<br/><br/> 
 
 간단한 설명과 로그아웃 버튼
 <br/><br/><br/> 
@@ -81,29 +81,31 @@ Link: https://natural-science-a2e20.web.app/
 ### 원칙 공부 리스트
 
 ![003 원칙공부](https://user-images.githubusercontent.com/85422934/200259839-887dc7ef-9587-4a74-be2e-936d58667ef6.png)
-<br/>
+<br/><br/> 
 과목과 테마를 선택 할 수 있습니다.
 <br/><br/><br/> 
 
 ### 문제학습
 
 ![004 문제학습1](https://user-images.githubusercontent.com/85422934/200260002-c5b4e1e7-3452-4398-b386-4c38dfc3e9ad.png)
-
+<br/><br/> 
 
 문제를 직접 풀어보고 정답을 확인 할 수 있습니다.
+<br/><br/><br/> 
 
 ![005 문제학습2](https://user-images.githubusercontent.com/85422934/200260102-8024eaac-e690-4bc2-80bd-c04cece6baaf.png)
-
+<br/><br/> 
 
 정답은 OMR 카드를 마킹해야 확인 가능합니다.
 
 또한 **복습추가** 버튼을 눌러 원하는 문제를 다시 풀 수 있습니다
-
+<br/><br/><br/> 
 
 ### 복습하기
 
 
 ![006 복습문제1](https://user-images.githubusercontent.com/85422934/200260864-14f274e1-500d-4d94-8231-a193a5f04642.png)
+<br/><br/> 
 
 아까 문제학습에서 복습하기에 추가한 문제를 학습 할 수 있습니다.
 
@@ -111,8 +113,10 @@ Link: https://natural-science-a2e20.web.app/
 
 
 ![007 복습문제2](https://user-images.githubusercontent.com/85422934/200261260-4456bfc4-e2dc-4797-9e21-8a94aef35170.png)
+<br/><br/> 
 
 사진을 클릭하면 확대하여 보실 수 있습니다.
+<br/><br/><br/> 
 
 ---
 ## 관리자 관점
@@ -121,39 +125,46 @@ Link: https://natural-science-a2e20.web.app/
 ### 홈
 
 ![008 관리자 홈](https://user-images.githubusercontent.com/85422934/200261904-e4375bfd-6bc8-4651-a3f5-5f1d3ae33d55.png)
+<br/><br/> 
 
 관리자는 홈 화면의 우측 하단에 문제를 추가 할 수 있는 버튼이 있습니다.
-
+<br/><br/><br/> 
 
 ### 문제 추가 양식
 
 ![009 관리자 문제추가](https://user-images.githubusercontent.com/85422934/200262110-d6aabed1-24bd-4026-922a-3efcf797bee4.png)
+<br/><br/> 
 
 문제 추가는 정해진 포맷을 제공합니다.
+<br/><br/><br/> 
 
 ### 단원별 학습에서 빠른추가
 
 ![010 관리자 빠른추가](https://user-images.githubusercontent.com/85422934/200262435-0cd788ff-3c3c-488c-a533-6ab1751a70da.png)
+<br/><br/> 
 
 같은 단원에서 새로운 문제를 추가한다면 단원별 학습에서 빠른 추가를 이용할 수 있습니다.
 
 ![011 관리자 빠른추가](https://user-images.githubusercontent.com/85422934/200262546-f3bf88cd-0ccb-4164-b6b9-81f60686979a.png)
+<br/><br/> 
 
 과목과 단원을 자동완성해주고 문제 순서를 제공하는 점에서 편리성을 확보 하였습니다.
-
+<br/><br/><br/> 
 
 
 ### 문제 수정
 
 ![012 관리자 문제 수정 삭제](https://user-images.githubusercontent.com/85422934/200262856-7dc10715-f60c-4e3a-8736-ed9d3138ddab.png)
+<br/><br/> 
 
 관리자는 문제카드에서 직접 문제의 정보를 수정 및 삭제 할 수 있습니다.
 
 
 ![013 관리자 문제 수정 삭제2](https://user-images.githubusercontent.com/85422934/200262963-688966d4-4a31-450a-82bc-976dfeb7c287.png)
+<br/><br/> 
 
 문제를 수정하면 문제 양식에서 자동으로 기존의 정보를 동기화 시켜 보여줍니다.
-
+<br/><br/><br/> 
 
 ---
 ## 향후 업데이트 계획
