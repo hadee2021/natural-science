@@ -13,7 +13,8 @@ Link: https://natural-science-a2e20.web.app/
 문제와 원칙을 업데이트하는 관리자의 편의성을 고려하였습니다.
 
 
-![과탐 소개 학생](https://user-images.githubusercontent.com/85422934/201569285-c16a3a5a-ad30-4264-8bf5-8e08b6f10996.gif)
+![과탐 소개 학생](https://user-images.githubusercontent.com/85422934/201569965-6df7ac26-969b-406f-8359-b23fdc255042.gif)
+
 
 
 ---
