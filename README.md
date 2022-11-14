@@ -144,6 +144,7 @@ Link: https://natural-science-a2e20.web.app/
 <br/><br/> 
 
 같은 단원에서 새로운 문제를 추가한다면 단원별 학습에서 빠른 추가를 이용할 수 있습니다.
+<br/><br/> 
 
 ![011 관리자 빠른추가](https://user-images.githubusercontent.com/85422934/200262546-f3bf88cd-0ccb-4164-b6b9-81f60686979a.png)
 <br/><br/> 
@@ -158,7 +159,7 @@ Link: https://natural-science-a2e20.web.app/
 <br/><br/> 
 
 관리자는 문제카드에서 직접 문제의 정보를 수정 및 삭제 할 수 있습니다.
-
+<br/><br/> 
 
 ![013 관리자 문제 수정 삭제2](https://user-images.githubusercontent.com/85422934/200262963-688966d4-4a31-450a-82bc-976dfeb7c287.png)
 <br/><br/> 
