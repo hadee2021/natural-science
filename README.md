@@ -73,9 +73,7 @@ Link: https://natural-science-a2e20.web.app/
 ### 홈
 
 ![002 홈](https://user-images.githubusercontent.com/85422934/200259702-33342e03-de3f-45c2-bb03-8bd5eadf7627.png)
-
-
-
+<br/><br/><br/>
 
 간단한 설명과 로그아웃 버튼
 
@@ -83,9 +81,7 @@ Link: https://natural-science-a2e20.web.app/
 ### 원칙 공부 리스트
 
 ![003 원칙공부](https://user-images.githubusercontent.com/85422934/200259839-887dc7ef-9587-4a74-be2e-936d58667ef6.png)
-
-
-
+<br/><br/><br/> 
 
 과목과 테마를 선택 할 수 있습니다.
 
