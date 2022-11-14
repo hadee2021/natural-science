@@ -63,27 +63,27 @@ Link: https://natural-science-a2e20.web.app/
 ### 처음화면
 
 ![001 처음 화면](https://user-images.githubusercontent.com/85422934/200259413-62ed0a5c-6df3-48bf-a32a-23656b9b5e08.png)
-<br/><br/><br/> 
+<br/>
 
 처음 이용하는 사람을 위해 시연하기 버튼이 있습니다.
 
 자신의 학습공간이 있으면 스터디룸으로 입장하시면 됩니다.
+<br/><br/><br/> 
 
 ### 홈
 
 ![002 홈](https://user-images.githubusercontent.com/85422934/200259702-33342e03-de3f-45c2-bb03-8bd5eadf7627.png)
-<br/><br/><br/>
+<br/>
 
 간단한 설명과 로그아웃 버튼
-
+<br/><br/><br/> 
 
 ### 원칙 공부 리스트
 
 ![003 원칙공부](https://user-images.githubusercontent.com/85422934/200259839-887dc7ef-9587-4a74-be2e-936d58667ef6.png)
-<br/><br/><br/> 
-
+<br/>
 과목과 테마를 선택 할 수 있습니다.
-
+<br/><br/><br/> 
 
 ### 문제학습
 
