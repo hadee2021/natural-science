@@ -22,7 +22,9 @@ Link: https://natural-science-a2e20.web.app/
 ## Core Framework
 ![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-**사용 근거** : 훅을 이용하여 상태관리를 하고 여러페이지를 부드럽게 구현 하기 위해 사용하였습니다. 
+**사용 근거** : 훅을 이용하여 상태관리를 하고 router로 여러페이지를 부드럽게 구현 하기 위해 사용하였습니다. 
+
+컴포넌트 단위로 나누어 관리하고 TypeScript도 같이 사용할 수 있는 이점이 컷습니다.
 
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
@@ -35,6 +37,8 @@ Link: https://natural-science-a2e20.web.app/
 **사용 근거** : firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing을 활용하면 중복된 요청을 피할 수 있어서 
 
 속도의 이득을 보기위해 사용했습니다.
+
+(필요에 따라 캐싱의 시간을 옵션에서 조절할 수 있습니다.)
 
 ## Design
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
