@@ -53,11 +53,20 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
-**사용 근거** : 학생과 문제의 정보를 collection과 document 구조를 활용하여 세부적으로 나누고 직관적으로 관리할 수 있어서 사용하였습니다.
+**사용 근거** : 
+서버는 Firebase로 학생과 문제의 정보를 collection과 document 구조를 활용하여 
+
+세부적으로 나누고 직관적으로 관리하기 위해 사용했습니다.
 
 소켓통신을 기반으로 하기에 정보의 변화가 실시간으로 반영 됩니다.
 
-깃 허브에 push하고 action에서 버튼을 클릭하면 firebase에 자동 배포가 됩니다.
+호스팅 역시 Firebase를 사용했습니다.
+
+학생들이 복습문제 기능을 사용하거나 관리자가 문제업데이트를 하는 등의 변동성이 클 것으로 예상되기 때문입니다.
+
+또한 그 만큼 서비스의 배포도 빠르게 진행되어야 하기 때문에
+
+깃 허브에서 CI/CD로 자동 배포기능을 사용하였습니다.
 
 
 ---
