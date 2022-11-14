@@ -22,9 +22,9 @@ Link: https://natural-science-a2e20.web.app/
 ## Core Framework
 ![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-**사용 근거** : 훅을 이용하여 상태관리를 하고 router로 여러페이지를 부드럽게 구현 하기 위해 사용하였습니다. 
+**사용 근거** : hook을 이용하여 상태관리를 하고 router의 사용이 Vue 3 보다 직관적이고
 
-컴포넌트 단위로 나누어 관리하고 TypeScript도 같이 사용할 수 있는 이점이 컷습니다.
+Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 싶어서 React를 사용하였습니다.
 
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
@@ -44,6 +44,10 @@ Link: https://natural-science-a2e20.web.app/
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
 **사용 근거** : 버튼, 아이콘, 등의 스타일을 제공하는 라이브러리를 사용하여 CSS의 의존도를 낮추었습니다.
+
+별도의 스타일이 필요한 경우는 styled-components를 활용했는데 
+
+고유의 className이 붙어서 중복을 피할 수 있었습니다.
 
 ## Backend/Hosting
 
