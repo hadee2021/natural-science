@@ -54,6 +54,7 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
 **사용 근거** : 
+
 서버는 Firebase로 학생과 문제의 정보를 collection과 document 구조를 활용하여 
 
 세부적으로 나누고 직관적으로 관리하기 위해 사용했습니다.
