@@ -72,16 +72,19 @@ const Start = () => {
       >
         <StartContainer>
           <Box sx={{mb: 3}} >
-            <Typography fontSize="1.8rem" lineHeight={1.5}>
+            <Typography fontSize="1.8rem" lineHeight={1.5} className="nanum-gothic">
               Hadee`s
             </Typography>
-            <Typography fontSize="1.8rem" lineHeight={1.5}>
+            <Typography fontSize="1.8rem" lineHeight={1.5} className="nanum-gothic">
               과학 탐구 영역
             </Typography>
           </Box>
           { tab === '' &&
             <>
-              <DemoDescript data-atropos-offset="5">
+              <DemoDescript 
+                data-atropos-offset="5" 
+                className="demo-descript"
+              >
                 <span data-atropos-offset="5">
                   과학 탐구 영역 공부중 이신가요 ??<br/>
                   킬러문제 원칙을 학습하세요<br/>
@@ -92,6 +95,7 @@ const Start = () => {
               </DemoDescript>
               <TabMenu>
                 <Button 
+                  className="nanum-gothic"
                   variant="contained" 
                   color="info"
                   sx = {{ 
@@ -103,6 +107,7 @@ const Start = () => {
                   시연하기
                 </Button>
                 <Button 
+                  className="nanum-gothic"
                   variant="contained" 
                   color="info"
                   sx = {{ 
@@ -219,9 +224,7 @@ const StartContainer = styled.div`
   width: 350px;
   height: 400px;
   background-color: white;
-  box-shadow: 2px 4px #eee;
-
-  
+  box-shadow: inset -3px -2px #eee;
 `
 
 
@@ -235,8 +238,8 @@ const DemoDescript = styled.div`
   border-radius: 8px;
   padding: 15px;
   line-height: 1.7;
-  font-size: 16px;
-  
+  font-size: 18px;
+  box-shadow: rgb(231 231 231) 2px 2px;
 `
 
 const TabMenu = styled.div`
