@@ -7,6 +7,7 @@ import { Lock, LockOpen} from '@mui/icons-material'
 import { useState } from 'react'
 import styled from 'styled-components'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
+import Atropos from 'atropos/react'
 
 interface UserForm {
   userName: string
@@ -63,20 +64,25 @@ const Start = () => {
 
   return (
     <StartWrapper>
-      <StartContainer>
-        <Box sx={{mb: 3}} >
-          <Typography fontSize="1.8rem" lineHeight={1.5}>
-            Hadee`s
-          </Typography>
-          <Typography fontSize="1.8rem" lineHeight={1.5}>
-            과학 탐구 영역
-          </Typography>
-        </Box>
-        { tab === '' &&
-          <>
-            <Box>
-              <DemoDescript>
-                <span>
+      {/* <div>
+        dddd
+      </div> */}
+      <Atropos
+        shadow={false}
+      >
+        <StartContainer>
+          <Box sx={{mb: 3}} >
+            <Typography fontSize="1.8rem" lineHeight={1.5}>
+              Hadee`s
+            </Typography>
+            <Typography fontSize="1.8rem" lineHeight={1.5}>
+              과학 탐구 영역
+            </Typography>
+          </Box>
+          { tab === '' &&
+            <>
+              <DemoDescript data-atropos-offset="5">
+                <span data-atropos-offset="5">
                   과학 탐구 영역 공부중 이신가요 ??<br/>
                   킬러문제 원칙을 학습하세요<br/>
                   시연하기를 통해 체험해 보고<br/>
@@ -84,101 +90,113 @@ const Start = () => {
                   ( 개인정보 필요없음 )
                 </span>
               </DemoDescript>
-            </Box>
-            <TabMenu>
-              <div
-                onClick={() => goToDemo()}
+              <TabMenu>
+                <Button 
+                  variant="contained" 
+                  color="info"
+                  sx = {{ 
+                    background : "lightskyblue",
+                    fontWeight: "bold"
+                  }}
+                  onClick={() => goToDemo()}
+                >
+                  시연하기
+                </Button>
+                <Button 
+                  variant="contained" 
+                  color="info"
+                  sx = {{ 
+                    background : "lightskyblue",
+                    fontWeight: "bold"
+                  }}
+                  onClick={() => setTab('login')}
+                >
+                  스터디룸
+                </Button>
+              </TabMenu>
+            </>
+          }
+          { tab === 'login' &&
+            <>
+              <span
+                onClick={() => setTab('')}
               >
-                시연하기
-              </div>
-              <div
-                onClick={() => setTab('login')}
-              >
-                스터디룸
-              </div>
-            </TabMenu>
-          </>
-        }
-        { tab === 'login' &&
-          <>
-            <span
-              onClick={() => setTab('')}
-            >
-              <ArrowBackIcon
-                style={{ 
-                  cursor: "pointer",
-                  color: "#2F74C0"
-                }}
-              />
-            </span>
-            <Box>
-              <Controller 
-                name="userName"
-                control={control}
-                rules={{
-                  required: "사용자 이름은 필수 입니다",
-                  minLength: {
-                    value: 2,
-                    message: "2글자 이상 입력 하세요",
-                  },
-                }}
-                render={({ fieldState }) => (
-                  <TextField 
-                    error={Boolean(fieldState.error)}
-                    required
-                    label="User NickName (필수)"
-                    variant="standard"
-                    {...register('userName')}
-                    fullWidth
-                    helperText={(
-                      <Box
-                        component="span"
-                        visibility={fieldState.error ? "visible" : "hidden"}
-                      >
-                        <span>
-                          {fieldState.error?.message}
-                        </span>
-                      </Box>
-                    )}
-                  />
-                )}
-              />
-              <Box>
-                <TextField 
-                  error={Boolean(errors.userPwd)}
-                  label="비밀번호 (선택)"
-                  variant="standard"
-                  {...register('userPwd')}
-                  fullWidth
-                  type={showPassword ? "text" : "password"}
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <LockOpen /> : <Lock />}
-                      </IconButton>
-                    )
+                <ArrowBackIcon
+                  style={{ 
+                    cursor: "pointer",
+                    color: "#2F74C0"
                   }}
                 />
+              </span>
+              <Box>
+                <Controller 
+                  name="userName"
+                  control={control}
+                  rules={{
+                    required: "사용자 이름은 필수 입니다",
+                    minLength: {
+                      value: 2,
+                      message: "2글자 이상 입력 하세요",
+                    },
+                  }}
+                  render={({ fieldState }) => (
+                    <TextField 
+                      error={Boolean(fieldState.error)}
+                      required
+                      label="User NickName (필수)"
+                      variant="standard"
+                      {...register('userName')}
+                      fullWidth
+                      helperText={(
+                        <Box
+                          component="span"
+                          visibility={fieldState.error ? "visible" : "hidden"}
+                        >
+                          <span>
+                            {fieldState.error?.message}
+                          </span>
+                        </Box>
+                      )}
+                    />
+                  )}
+                />
+                <Box>
+                  <TextField 
+                    error={Boolean(errors.userPwd)}
+                    label="비밀번호 (선택)"
+                    variant="standard"
+                    {...register('userPwd')}
+                    fullWidth
+                    type={showPassword ? "text" : "password"}
+                    InputProps={{
+                      endAdornment: (
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <LockOpen /> : <Lock />}
+                        </IconButton>
+                      )
+                    }}
+                  />
+                </Box>
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{mt: 5}}
+                  fullWidth
+                  onClick={() => {
+                    if(isSuccess) goToMain()
+                  }}
+                >
+                  시작하기
+                </Button>
               </Box>
-              <Button
-                variant="contained"
-                size="large"
-                sx={{mt: 5}}
-                fullWidth
-                onClick={() => {
-                  if(isSuccess) goToMain()
-                }}
-              >
-                시작하기
-              </Button>
-            </Box>
-          </>
-        }
-      </StartContainer>
+            </>
+          }
+        </StartContainer>
+      </Atropos>
     </StartWrapper>
   )
 }
@@ -187,6 +205,8 @@ export default Start
 
 const StartWrapper = styled.div`
   display: flex;
+  flex-flow: column;
+  gap: 30px;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -197,9 +217,11 @@ const StartContainer = styled.div`
   padding: 20px;
   border-radius: 9px;
   width: 350px;
-  height: 420px;
+  height: 400px;
   background-color: white;
   box-shadow: 2px 4px #eee;
+
+  
 `
 
 
@@ -219,7 +241,9 @@ const DemoDescript = styled.div`
 
 const TabMenu = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-flow: row;
+  justify-content: flex-end;
+  gap: 20px;
   margin-top: 40px;
 
   > div {
