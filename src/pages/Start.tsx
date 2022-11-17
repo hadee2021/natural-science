@@ -1,3 +1,4 @@
+ /* eslint-disable */ 
 import React from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { useCreateUser, useFindUser } from '../core/query'
@@ -63,10 +64,7 @@ const Start = () => {
   const [tab, setTab] = useState('')
 
   return (
-    <StartWrapper>
-      {/* <div>
-        dddd
-      </div> */}
+    <StartWrapper className="start-wrapper">
       <Atropos
         shadow={false}
       >
@@ -82,10 +80,10 @@ const Start = () => {
           { tab === '' &&
             <>
               <DemoDescript 
-                data-atropos-offset="5" 
+                data-atropos-offset="7" 
                 className="demo-descript"
               >
-                <span data-atropos-offset="5">
+                <span data-atropos-offset="7">
                   과학 탐구 영역 공부중 이신가요 ??<br/>
                   킬러문제 원칙을 학습하세요<br/>
                   시연하기를 통해 체험해 보고<br/>
@@ -215,7 +213,7 @@ const StartWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: aliceblue;
+  /*background: aliceblue;*/
 `
 
 const StartContainer = styled.div`
@@ -224,7 +222,7 @@ const StartContainer = styled.div`
   width: 350px;
   height: 400px;
   background-color: white;
-  box-shadow: inset -3px -2px #eee;
+  box-shadow: inset -3px -2px #ebebeb;
 `
 
 

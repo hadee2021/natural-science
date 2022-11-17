@@ -70,7 +70,8 @@ const MainNavWrapper = styled.div`
   margin-left: 25px;
   margin-right: 15px;
   border-radius: 9px;
-  background-color: white;
+  /*background-color: white;*/
+  /*background-color: #FFF390;*/
   padding: 25px 20px;
   font-size: 1.1rem;
   text-align: center;
