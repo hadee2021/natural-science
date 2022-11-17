@@ -2,6 +2,7 @@ declare module 'react-query'
 declare module 'sha1'
 declare module 'styled-components'
 declare module 'lodash'
+declare module 'luxon'
 
 declare interface User {
   id: string

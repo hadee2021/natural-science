@@ -69,7 +69,7 @@ const Start = () => {
         shadow={false}
       >
         <StartContainer>
-          <Box sx={{mb: 3}} >
+          <Box sx={{mb: 3}} data-atropos-offset="7" >
             <Typography fontSize="1.8rem" lineHeight={1.5} className="nanum-gothic">
               Hadee`s
             </Typography>
@@ -91,7 +91,7 @@ const Start = () => {
                   ( 개인정보 필요없음 )
                 </span>
               </DemoDescript>
-              <TabMenu>
+              <TabMenu data-atropos-offset="5">
                 <Button 
                   className="nanum-gothic"
                   variant="contained" 

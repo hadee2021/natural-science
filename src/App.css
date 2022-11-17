@@ -13,6 +13,7 @@ p,
 
 .start-wrapper {
   background-image: url('../public/PIC/시작\ 배경4.jpg');
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: cover;
+  background-position: center;
 }

@@ -1,10 +1,10 @@
  /* eslint-disable */ 
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
+import { DateTime } from "luxon"
 
 interface Props {
   userName: string
@@ -30,14 +30,20 @@ const MainNav = ({userName} : Props) => {
     navigate(move)
   }
 
+  const [time, setTime] = useState(DateTime.now())
+
+  setInterval(() => {
+    setTime(DateTime.now())
+  }, 1000)
 
   return (
     <MainNavWrapper>
-      <div>
-        <div className="user-name">
-          <AccountCircleIcon/> <br/>
-          {userName}
-        </div>
+      <div className="time">
+        {time.toLocaleString(DateTime.TIME_SIMPLE)} 
+      </div>
+      <div className="user-name">
+        <span>닉네임 : </span>
+        {userName}
       </div>
       <div
         className={pathname === `/main/${userId}`? "highlight": ""}
@@ -73,6 +79,7 @@ const MainNavWrapper = styled.div`
   /*background-color: white;*/
   /*background-color: #FFF390;*/
   padding: 25px 20px;
+  padding-top: 0;
   font-size: 1.1rem;
   text-align: center;
 
@@ -87,6 +94,13 @@ const MainNavWrapper = styled.div`
     cursor: pointer;
   }
 
+  .time {
+    border-bottom: 1px solid aliceblue;
+    font-weight: bold;
+    font-size: 25px;
+    color: #2F74C0;
+  }
+
   .user-name {
     word-break: break-word;
     
@@ -99,12 +113,18 @@ const MainNavWrapper = styled.div`
     width: 150px;
     min-width: 150px;
     font-size: 15px;
+    .time {
+      font-size: 20px;
+    }
   }
 
   @media screen and (max-width: 560px) {
     width: 100px;
     min-width: 100px;
     font-size: 13px;
+    .time {
+      font-size: 18px;
+    }
   }
 
   @media screen and (max-width: 450px) {

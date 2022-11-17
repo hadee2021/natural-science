@@ -66,7 +66,7 @@ const OMRWrapper = styled.div`
   > div {
     color: #F07CB0;
     border: 1px solid #F07CB0;
-    padding: 0px 3px;
+    padding: 1px 2px;
     border-radius: 10px;
     cursor: pointer;
   }
