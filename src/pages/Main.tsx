@@ -27,10 +27,9 @@ export default Main
 
 const MainWrapper = styled.div`
   display: flex;
-  /*background-color: aliceblue;*/
   background-color: #F8F6F9;
   height: 100vh;
-  
+
   > div:last-child {
     flex: 1;
     background-color: white;

@@ -9,6 +9,7 @@ import PrivateRoute from './router/PrivateRoute'
 import MainReview from './components/MainPage/MainReview'
 import MainPrinciple from './components/MainPage/MainPrinciple'
 import MainWorkBook from './components/MainPage/MainWorkBook'
+import MainVideo from './components/MainPage/MainVideo'
 import MainNotice from './components/MainPage/MainNotice'
 import Study from './pages/Study'
 
@@ -25,6 +26,7 @@ const Router = () => {
           <Route path="review" element={<MainReview/>} />
           <Route path="principle" element={<MainPrinciple/>}/>
           <Route path="workbook" element={<MainWorkBook/>}/>
+          <Route path="video" element={<MainVideo/>}/>
           <Route path="notice" element={<MainNotice/>}/>
         </Route>
         <Route path="/study/:id/:subject/:step/:subjectId" element={<Study/>}/>

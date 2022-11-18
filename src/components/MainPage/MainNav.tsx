@@ -6,7 +6,9 @@ import { useRecoilState } from 'recoil'
 import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { DateTime } from "luxon"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faStar, faBook, faAngleRight, faPen ,faBookReader ,faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { 
+  faHouse, faStar, faBook, faAngleRight, faPen, faCircleExclamation, faVideo
+} from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   userName: string
@@ -95,6 +97,18 @@ const MainNav = ({userName} : Props) => {
         }
       </div>
       <div
+        className={pathname === `/main/${userId}/video`? "highlight": "nav-btn"}
+        onClick={() => movePage(`/main/${userId}/video`)}
+      >
+        <div>
+          <FontAwesomeIcon icon={faVideo} style={{ color: "orangered" }}/>
+          <span>추천 인강</span>
+        </div>
+        {pathname === `/main/${userId}/video` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
+      </div>
+      <div
         className={pathname === `/main/${userId}/notice`? "highlight": "nav-btn"}
         onClick={() => movePage(`/main/${userId}/notice`)}
       >
@@ -115,17 +129,10 @@ export default MainNav
 const MainNavWrapper = styled.div`
   width: 220px;
   min-width: 220px;
-  margin: 35px 0;
-  margin-left: 25px;
-  margin-right: 15px;
-  border-radius: 9px;
-  /*background-color: white;*/
-  padding-left: 20px;
-  padding-bottom: 25px;
+  margin: 35px 25px;
   font-size: 1.1rem;
 
   .highlight {
-    /*color: #2F74C0;*/
     background: #FFFFFF;
     border-radius: 9px;
     display: flex;
@@ -173,17 +180,30 @@ const MainNavWrapper = styled.div`
   }
 
   @media screen and (max-width: 560px) {
-    width: 100px;
-    min-width: 100px;
-    font-size: 13px;
-    .time {
-      font-size: 18px;
+    width: 50px;
+    min-width: 50px;
+    padding: 0;
+    margin: 50px 10px;
+
+    .time,
+    .user-name,
+    .nav-btn > div > span, 
+    .highlight > div > span,
+    .highlight > svg {
+      display: none;
+    }
+
+    .nav-btn,
+    .highlight {
+      padding: 12px 0px;
+      text-align: center;
+      display: block;
     }
   }
 
   @media screen and (max-width: 450px) {
-    width: 80px;
-    min-width: 80px;
+    width: 30px;
+    min-width: 30px;
     font-size: 13px;
   }
 `
