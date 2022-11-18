@@ -5,6 +5,8 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { DateTime } from "luxon"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHouse, faStar, faBook, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   userName: string
@@ -46,22 +48,40 @@ const MainNav = ({userName} : Props) => {
         {userName}
       </div>
       <div
-        className={pathname === `/main/${userId}`? "highlight": ""}
+        className={pathname === `/main/${userId}`? "highlight": "nav-btn"}
         onClick={() => movePage(`/main/${userId}`)}
       >
-        홈
+        <div>
+          <FontAwesomeIcon icon={faHouse} style={{ color: "#F05A4E"}}/>
+          <span>홈</span>
+        </div>
+        {pathname === `/main/${userId}` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
       </div>
       <div
-        className={pathname === `/main/${userId}/review`? "highlight": ""}
+        className={pathname === `/main/${userId}/review`? "highlight": "nav-btn"}
         onClick={() => movePage(`/main/${userId}/review`)}
       >
-        복습문제
+        <div>
+          <FontAwesomeIcon icon={faStar} style={{ color: "#FFCA2B" }}/>
+          <span>복습문제</span>
+        </div>
+        {pathname === `/main/${userId}/review` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
       </div>
       <div
-        className={pathname === `/main/${userId}/principle`? "highlight": ""}
+        className={pathname === `/main/${userId}/principle`? "highlight": "nav-btn"}
         onClick={() => movePage(`/main/${userId}/principle`)}
       >
-        원칙 공부
+        <div>
+          <FontAwesomeIcon icon={faBook} style={{ color: "#2F74C0" }}/>
+          <span>원칙 공부</span>
+        </div>
+        {pathname === `/main/${userId}/principle` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
       </div>
     </MainNavWrapper>
   )
@@ -77,20 +97,31 @@ const MainNavWrapper = styled.div`
   margin-right: 15px;
   border-radius: 9px;
   /*background-color: white;*/
-  /*background-color: #FFF390;*/
-  padding: 25px 20px;
-  padding-top: 0;
+  padding-left: 20px;
+  padding-bottom: 25px;
   font-size: 1.1rem;
-  text-align: center;
 
   .highlight {
-    color: #2F74C0;
+    /*color: #2F74C0;*/
+    background: #FFFFFF;
+    border-radius: 9px;
+    display: flex;
+    justify-content: space-between;
+
+    > div:first-child > span {
+      margin-left: 15px;
+    }
+  }
+
+  .nav-btn {
+    > div:first-child > span {
+      margin-left: 15px;
+    }
   }
 
   > div {
     margin: 12px 0;
-    border-bottom: 1px solid orangered;
-    padding-bottom: 15px;
+    padding: 12px 10px;
     cursor: pointer;
   }
 
@@ -99,14 +130,14 @@ const MainNavWrapper = styled.div`
     font-weight: bold;
     font-size: 25px;
     color: #2F74C0;
+    cursor: auto;
+    margin: 0;
+    padding-top: 0;
   }
 
   .user-name {
     word-break: break-word;
-    
-    > svg:first-child {
-      align-self: center;
-    }
+    cursor: auto;
   }
 
   @media screen and (max-width: 768px) {
