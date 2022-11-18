@@ -34,10 +34,11 @@ const MainWrapper = styled.div`
   > div:last-child {
     flex: 1;
     background-color: white;
-    margin: 35px 0;
+    /*margin: 35px 0;
     margin-right: 25px;
     border-radius: 9px;
-    padding: 30px;
+    padding: 30px;*/
+    padding: 40px 30px;
     overflow: auto;
   }
 

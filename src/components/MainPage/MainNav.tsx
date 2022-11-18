@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil'
 import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { DateTime } from "luxon"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse, faStar, faBook, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faHouse, faStar, faBook, faAngleRight, faPen ,faBookReader ,faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
   userName: string
@@ -44,8 +44,7 @@ const MainNav = ({userName} : Props) => {
         {time.toLocaleString(DateTime.TIME_SIMPLE)} 
       </div>
       <div className="user-name">
-        <span>닉네임 : </span>
-        {userName}
+        <span>{userName}</span>
       </div>
       <div
         className={pathname === `/main/${userId}`? "highlight": "nav-btn"}
@@ -76,10 +75,34 @@ const MainNav = ({userName} : Props) => {
         onClick={() => movePage(`/main/${userId}/principle`)}
       >
         <div>
-          <FontAwesomeIcon icon={faBook} style={{ color: "#2F74C0" }}/>
+          <FontAwesomeIcon icon={faPen} style={{ color: "#474D59" }}/>
           <span>원칙 공부</span>
         </div>
         {pathname === `/main/${userId}/principle` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
+      </div>
+      <div
+        className={pathname === `/main/${userId}/workbook`? "highlight": "nav-btn"}
+        onClick={() => movePage(`/main/${userId}/workbook`)}
+      >
+        <div>
+          <FontAwesomeIcon icon={faBook} style={{ color: "#2F74C0" }}/>
+          <span>문제집</span>
+        </div>
+        {pathname === `/main/${userId}/workbook` &&
+          <FontAwesomeIcon icon={faAngleRight}/>
+        }
+      </div>
+      <div
+        className={pathname === `/main/${userId}/notice`? "highlight": "nav-btn"}
+        onClick={() => movePage(`/main/${userId}/notice`)}
+      >
+        <div>
+          <FontAwesomeIcon icon={faCircleExclamation} style={{ color: "#42B883" }}/>
+          <span>공지 사항</span>
+        </div>
+        {pathname === `/main/${userId}/notice` &&
           <FontAwesomeIcon icon={faAngleRight}/>
         }
       </div>
@@ -131,13 +154,13 @@ const MainNavWrapper = styled.div`
     font-size: 25px;
     color: #2F74C0;
     cursor: auto;
-    margin: 0;
-    padding-top: 0;
+    margin-left: 24px;
   }
 
   .user-name {
     word-break: break-word;
     cursor: auto;
+    font-weight: bold;
   }
 
   @media screen and (max-width: 768px) {
