@@ -1,9 +1,11 @@
+ /* eslint-disable */ 
 import React, { useContext } from 'react'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import styled from 'styled-components'
 import CheckQuestionCard from './CheckQuestionCard'
 import { checkQuestionListContext } from '../../module/questionContext'
+//import { checkSortContext } from '../../module/checkSortContext'
 
 const responsive = {
   superLargeDesktop: {
@@ -31,6 +33,15 @@ interface Props {
 
 const CheckGroupBody = ({ setOpenModal}: Props) => {
   const checkQuestionList = useContext(checkQuestionListContext)
+  
+
+  /** 정렬을 임시방편으로 가져와서 진행 => query.ts에서 작동*/
+  //const { sortKey, order } = useContext(checkSortContext)
+  // checkQuestionList.sort((a, b) => {
+  //   if(order === 'desc') return b[sortKey] - a[sortKey]
+  //   return a[sortKey] - b[sortKey]
+  // })
+
   return (
     <CarouselContainer>
       <Carousel responsive={responsive} className="carousel">

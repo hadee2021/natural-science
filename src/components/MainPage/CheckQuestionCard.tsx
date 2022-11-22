@@ -1,12 +1,13 @@
  /* eslint-disable */ 
-import React, { useState } from 'react'
-import { Card, CardContent,IconButton, Box } from '@mui/material'
+import React, { useContext } from 'react'
+import { Card, CardContent,IconButton } from '@mui/material'
 import {  useDeleteCheckQuestion } from '../../core/query'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { Close } from '@mui/icons-material'
 import { ModalImgSrcAtom } from '../../core/Atom'
 import { useRecoilState } from 'recoil'
+import { checkSortContext } from '../../module/checkSortContext'
 
 interface Props {
   question: Question,
@@ -20,10 +21,13 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
   } = useParams()
 
   // 체크문항 해제
+  
+  const {sortKey, order} = useContext(checkSortContext)
+  
   const { 
     deleteCheckQuestion,
     isLoading: isDeleting,
-  } = useDeleteCheckQuestion(userId, question.id)
+  } = useDeleteCheckQuestion(userId, question.subject, question.id, sortKey, order)
 
   const onCheckDelete = () => {
     if(isDeleting) return
@@ -60,14 +64,14 @@ const CheckQuestionCard = ({question, setOpenModal} : Props) => {
               <Close fontSize="small"/>
             </IconButton>
           </CardHeader>
-          <Box>
+          <ImgBox>
             <img 
               className="question-mini-img"
               src={question.imgSrc} 
               width={250}
               onClick={() => openImg(question.imgSrc)}
             />
-          </Box>
+          </ImgBox>
         </CardContent>
       </Card>
       
@@ -146,4 +150,9 @@ const CardHeader = styled.div`
   padding-bottom: 10px;
   color: #2F74C0;
   margin-bottom: 10px;
+`
+
+const ImgBox = styled.div`
+  display: flex;
+  justify-content: center;
 `

@@ -1,38 +1,17 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
-import { useCheckQuestionList } from '../../core/query'
-import { groupBy } from 'lodash'
-import { useMemo } from "react"
-import CheckGroup from './CheckGroup'
-import { checkQuestionListContext } from '../../module/questionContext'
+import CheckSubject from './CheckSubject'
 
 
 const MainReview = () => {
-  const { 
-    id: userId = ''
-  } = useParams()
-
-  const {
-    checkQuestionList
-  } = useCheckQuestionList(userId)
-
-  const checkObj = groupBy(checkQuestionList, 'step')
-  const checkStepEntries = useMemo(
-    () => Object.entries(checkObj),
-    [[...checkQuestionList]]
-  )
-
-  
-
+  const subjectArr = ['물리','화학']
 
   return (
     <div>
-      {checkStepEntries.map(([step, checkQuestionList]) => (
-        <checkQuestionListContext.Provider value={checkQuestionList as Question[]} key={step}>
-          <CheckGroup
-            step={step}
-          />
-        </checkQuestionListContext.Provider>
+      {subjectArr.map((subject,i) => (
+        <CheckSubject
+          key={i}
+          subject={subject}
+        />
       ))}
     </div>
   )

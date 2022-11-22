@@ -65,7 +65,7 @@ const QuestionCard = ({question}:Props) => {
   const { 
     addCheckQuestion,
     isLoading: isAdding
-  } = useAddCheckQuestion(userId, question.id)
+  } = useAddCheckQuestion(userId, question.subject, question.id)
 
   const onCheck = () => {
     if(isAdding) return

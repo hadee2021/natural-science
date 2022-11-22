@@ -1,6 +1,6 @@
 import { fireStore, getDefaultConverter } from '../core/firestore'
 import { 
-  collection, where, query, doc, QueryConstraint, orderBy
+  collection, where, query, doc, QueryConstraint, orderBy, OrderByDirection
 } from 'firebase/firestore'
 import { nanoid } from 'nanoid'
 import { 
@@ -11,10 +11,13 @@ import {
 } from "@react-query-firebase/firestore"
 import { hash } from './util'
 import { useMemo } from 'react'
+import { useDeepCompareMemo } from 'use-deep-compare'
 
 const ROOT_USER = 'users'
 const userConverter = getDefaultConverter<User>()
 const EMPTY_USER_ID = 'EMPTY_USER_ID'
+const CHECK_QUESTION_SUBJECT = '체크한 과목'
+const EMPTY_QUESTION_SUBJECT = 'EMPTY_QUESTION_SUBJECT'
 const CHECK_QUESTION_LIST = '체크한 문제'
 
 const ROOT_QUESTION = 'questions'
@@ -33,20 +36,24 @@ const getUserDocRef = (userId: string) => (
   doc(fireStore, ROOT_USER, userId || EMPTY_USER_ID).withConverter(userConverter)
 )
 
-const getUserCheckCollectionRef = (userId: string) => {
+const getUserCheckCollectionRef = (userId: string, questionSubject: string) => {
   return collection(
     fireStore,
     ROOT_USER,
     userId || EMPTY_USER_ID,
+    CHECK_QUESTION_SUBJECT,
+    questionSubject || EMPTY_QUESTION_SUBJECT,
     CHECK_QUESTION_LIST
   )
 }
 
-const getUserCheckDocRef = (userId: string, questionId: string) => {
+const getUserCheckDocRef = (userId: string, questionSubject: string, questionId: string) => {
   return doc(
     fireStore,
     ROOT_USER,
     userId || EMPTY_USER_ID,
+    CHECK_QUESTION_SUBJECT,
+    questionSubject || EMPTY_QUESTION_SUBJECT,
     CHECK_QUESTION_LIST,
     questionId || EMPTY_QUESTION_ID
   )
@@ -136,8 +143,8 @@ export const useUser = (userId : string) => {
 
 /** User 체크한 문제 추가 */
 
-export const useAddCheckQuestion = (userId: string, questionId: string) => {
-  const checkDocRef = getUserCheckDocRef(userId, questionId)
+export const useAddCheckQuestion = (userId: string, questionSubject: string, questionId: string) => {
+  const checkDocRef = getUserCheckDocRef(userId, questionSubject, questionId)
 
   const { mutate, ...result } = useFirestoreDocumentMutation(checkDocRef, { merge: true })
 
@@ -151,12 +158,19 @@ export const useAddCheckQuestion = (userId: string, questionId: string) => {
 }
 /** User 체크한 문제 가져오기 */
 
-export const useCheckQuestionList = (userId: string) => {
-  const checkCollectionRef = getUserCheckCollectionRef(userId)
+export const useCheckQuestionList = (userId: string, questionSubject: string, sortKey:string, order:OrderByDirection) => {
+  const checkCollectionRef = getUserCheckCollectionRef(userId, questionSubject)
+  
+  const queryConstraints = useDeepCompareMemo(() => {
+    const constraints: QueryConstraint[] = []
+    constraints.push(orderBy(sortKey, order))
 
-  const constraints: QueryConstraint[] = []
-  constraints.push(orderBy('questionNumber', 'asc'))
-  const queryConstraints = constraints
+    return constraints
+  },[sortKey, order])
+
+  // const constraints: QueryConstraint[] = []
+  // constraints.push(orderBy(sortKey, order))
+  // const queryConstraints = constraints
 
   const ref = query(
     checkCollectionRef,
@@ -168,13 +182,16 @@ export const useCheckQuestionList = (userId: string) => {
     dataUpdatedAt,
     ...result
   } = useFirestoreQueryData(
-    [ROOT_USER, userId, CHECK_QUESTION_LIST],
+    [ROOT_USER, userId, CHECK_QUESTION_SUBJECT, questionSubject, CHECK_QUESTION_LIST],
     ref,
     { subscribe: true },
     { enabled: Boolean(userId) },
   )
-  checkQuestionList.sort((a: { questionNumber: number }, b: { questionNumber: number }) => {
-    return a.questionNumber - b.questionNumber
+
+  // 가져와서 정렬 
+  checkQuestionList.sort((a: { [sortKey:string]: number }, b: { [sortKey:string]: number }) => {
+    if(order === 'desc') return b[sortKey] - a[sortKey]
+    return a[sortKey] - b[sortKey]
   })
 
   return useMemo(() =>{
@@ -188,12 +205,12 @@ export const useCheckQuestionList = (userId: string) => {
 
 /** User 체크한 문제 삭제 */
 
-export const useDeleteCheckQuestion = (userId: string, questionId: string) => {
-  const checkDocRef = getUserCheckDocRef(userId, questionId)
+export const useDeleteCheckQuestion = (userId: string, questionSubject: string, questionId: string, sortKey:string ,order: OrderByDirection) => {
+  const checkDocRef = getUserCheckDocRef(userId, questionSubject, questionId)
 
   const {
     refetch: refetchCheckQuestionList
-  } = useCheckQuestionList(userId)
+  } = useCheckQuestionList(userId, questionSubject, sortKey, order)
 
   const { mutate, ...result } = useFirestoreDocumentDeletion(checkDocRef, {
     onSuccess() {

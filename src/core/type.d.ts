@@ -22,6 +22,7 @@ declare interface Question {
   questionSequence: number
   questionAnswer: number
   questionScore: number
+  [sortKey: string] : number // 정렬용도
 }
 
 declare type Subject = "physical" | "chemical"

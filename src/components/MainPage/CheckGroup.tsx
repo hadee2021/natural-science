@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Box, Collapse, Typography, IconButton } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import styled from 'styled-components'
+import styled, { css }  from 'styled-components'
 import { ModalImgSrcAtom } from '../../core/Atom'
 import { useRecoilState } from 'recoil'
 import { Close } from '@mui/icons-material'
@@ -10,10 +10,15 @@ import CheckGroupBody from './CheckGroupBody'
 
 
 interface Props {
+  subject: string
   step: string
 }
 
-const CheckGroup = ({step}: Props) => {
+interface SubjectBg {
+  subject: string
+}
+
+const CheckGroup = ({subject, step}: Props) => {
   const [open, setOpen] = useState(true)
   const [openModal, setOpenModal] = useState(false)
   const [modalImgSrc, setModalImgSrc] = useRecoilState(ModalImgSrcAtom)
@@ -25,7 +30,7 @@ const CheckGroup = ({step}: Props) => {
   return (
     <>
       <Box>
-        <CheckGroupHeader onClick={() => setOpen(!open)}>
+        <CheckGroupHeader onClick={() => setOpen(!open)} subject={subject}>
           <Box>
             <Typography variant="subtitle1" fontWeight="bold" className="step-header">
               {step}
@@ -66,13 +71,33 @@ const CheckGroup = ({step}: Props) => {
 
 export default CheckGroup
 
-const CheckGroupHeader = styled.div`
+const getSubjectBgColor = (subject: string) => {
+  let bgColor
+  switch(subject) {
+    case "물리":
+      bgColor = "#61dafb6b"
+      break
+
+    case "화학":
+      bgColor = "#f79c0fc9"
+      break
+
+    default :
+      bgColor = "#61dafb6b"
+      break
+  }
+  return css`
+    background-color: ${bgColor};
+  `
+}
+
+const CheckGroupHeader = styled.div<SubjectBg>`
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   cursor: pointer;
-  background: #61dafb6b;
-  padding: 10px 25px;
+  ${({subject}: SubjectBg) => getSubjectBgColor(subject)}
+  padding: 8px 25px;
   margin: 25px 0;
   border-radius: 10px;
 
