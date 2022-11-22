@@ -1,38 +1,20 @@
  /* eslint-disable */ 
 import React from 'react'
 import styled from 'styled-components'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useUser } from '../../core/query'
-import { Button } from '@mui/material'
-import { Fab } from '@mui/material'
-import { Add } from '@mui/icons-material'
-import { useRecoilState } from 'recoil'
-import { questionDataAtom, IsQuestionUpdateAtom } from '../../core/Atom'
+import PersonChart from '../PersonChart'
 
 const MainHome = () => {
   const { id: userId = '' } = useParams()
   const { user } = useUser(userId)
-  const navigate = useNavigate()
-
-  const[questionData, setQuestionData] = useRecoilState(questionDataAtom)
-  const[questionUpdate, setQuestionUpdate] = useRecoilState(IsQuestionUpdateAtom)
-
-  const goToForm = () => {
-    setQuestionData({
-      ...questionData,
-      step : '',
-      questionSequence: 1,
-    })
-    setQuestionUpdate(false) // 수정이 아니다.
-    navigate(`/main/${userId}/form`)
-  }
 
   return (
     <MainHomeWrapper>
       <div className="user-name">
         {user?.name} 님
       </div>
-      <Descript>
+      {/* <Descript>
         <span>
           원칙 공부를 통해 기출문제를 분석하세요<br/>
           테마별로 연습 할 수 있습니다 !<br/>
@@ -42,20 +24,8 @@ const MainHome = () => {
       </Descript>
       <div className="logout">
         <Button onClick={ () => navigate('/') }>로그아웃</Button>
-      </div>
-      {user?.author &&
-        <Fab
-          color="primary"
-          sx={{
-            position :"fixed",
-            right: 20,
-            bottom: 20
-          }}
-          onClick={() => goToForm()}
-        >
-          <Add fontSize="large" />
-        </Fab>
-      }
+      </div> */}
+      <PersonChart/>
     </MainHomeWrapper>
   )
 }

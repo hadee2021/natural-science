@@ -7,7 +7,7 @@ import { IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { DateTime } from "luxon"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
-  faHouse, faStar, faBook, faAngleRight, faPen, faCircleExclamation, faVideo
+  faHouse, faStar, faBook, faAngleRight, faPen, faCircleExclamation, faVideo, faDoorOpen
 } from '@fortawesome/free-solid-svg-icons'
 
 interface Props {
@@ -102,7 +102,7 @@ const MainNav = ({userName} : Props) => {
       >
         <div>
           <FontAwesomeIcon icon={faVideo} style={{ color: "orangered" }}/>
-          <span>추천 인강</span>
+          <span>추천 영상</span>
         </div>
         {pathname === `/main/${userId}/video` &&
           <FontAwesomeIcon icon={faAngleRight}/>
@@ -119,6 +119,15 @@ const MainNav = ({userName} : Props) => {
         {pathname === `/main/${userId}/notice` &&
           <FontAwesomeIcon icon={faAngleRight}/>
         }
+      </div>
+      <div
+        className="nav-btn"
+        onClick={() => navigate('/')}
+      >
+        <div>
+          <FontAwesomeIcon icon={faDoorOpen} style={{ color: "#AE6C1E" }}/>
+          <span>나가기</span>
+        </div>
       </div>
     </MainNavWrapper>
   )

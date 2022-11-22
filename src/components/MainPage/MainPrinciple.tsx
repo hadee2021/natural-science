@@ -7,6 +7,8 @@ import { Button } from '@mui/material'
 import { useRecoilState } from 'recoil'
 import { questionDataAtom, IsQuestionUpdateAtom, IsQuickAddAtom } from '../../core/Atom'
 import { useUser } from '../../core/query'
+import { Fab } from '@mui/material'
+import { Add } from '@mui/icons-material'
 
 
 const MainPrinciple = () => {
@@ -45,6 +47,17 @@ const MainPrinciple = () => {
 
   const { user } = useUser(userId)
 
+  // 새로추가
+  const goToForm = () => {
+    setQuestionData({
+      ...questionData,
+      step : '',
+      questionSequence: 1,
+    })
+    setQuestionUpdate(false) // 수정이 아니다.
+    navigate(`/main/${userId}/form`)
+  }
+
   return (
     <PrincipleWrapper>
       <PrincipleHeader>
@@ -68,6 +81,19 @@ const MainPrinciple = () => {
           </div>
         ))}
       </PrincipleList>
+      {user?.author &&
+        <Fab
+          color="primary"
+          sx={{
+            position :"fixed",
+            right: 20,
+            bottom: 20
+          }}
+          onClick={() => goToForm()}
+        >
+          <Add fontSize="large" />
+        </Fab>
+      }
     </PrincipleWrapper>
   )
 }

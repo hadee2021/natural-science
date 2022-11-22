@@ -3,6 +3,7 @@ declare module 'sha1'
 declare module 'styled-components'
 declare module 'lodash'
 declare module 'luxon'
+declare module 'chart.js'
 
 declare interface User {
   id: string
