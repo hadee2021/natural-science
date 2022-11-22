@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend,
   CategoryScale,
@@ -57,13 +58,19 @@ const PersonChart = () => {
   }
 
   return (
-    <div>
+    <ChartWrapper>
+      <div>물리 나의 복습문제</div>
       <Bar
         data={data}
         options={options}
       />
-    </div>
+    </ChartWrapper>
   )
 }
 
 export default PersonChart
+
+const ChartWrapper = styled.div`
+  width: 75%;
+  margin-left: 90px;
+`
