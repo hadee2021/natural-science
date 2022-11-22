@@ -1,14 +1,28 @@
 import React from 'react'
-import { Doughnut } from 'react-chartjs-2'
-import { Chart, ArcElement,Tooltip, Legend } from "chart.js"
-Chart.register(ArcElement,Tooltip, Legend)
+import { Bar } from 'react-chartjs-2'
+import { Chart, ArcElement, Tooltip, Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js"
+Chart.register(ArcElement,Tooltip,Legend,CategoryScale,LinearScale,BarElement)
 
 const PersonChart = () => {
   const data = {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    labels: [
+      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
+      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
+      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
+      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange'
+    ],
     datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      label: '복습문항 수',
+      data: [
+        12, 19, 3, 15, 2, 3,
+        12, 19, 3, 15, 2, 3,
+        12, 19, 3, 5, 12, 3,
+        12, 19, 3, 5, 2, 13
+      ],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -28,10 +42,25 @@ const PersonChart = () => {
       borderWidth: 1,
     }]
   }
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: true,
+        text: 'Chart.js Bar Chart',
+      },
+    },
+  }
+
   return (
     <div>
-      <Doughnut
+      <Bar
         data={data}
+        options={options}
       />
     </div>
   )

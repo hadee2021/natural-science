@@ -12,7 +12,7 @@ const MainHome = () => {
   return (
     <MainHomeWrapper>
       <div className="user-name">
-        {user?.name} 님
+        {user?.name} 님의 복습현황
       </div>
       {/* <Descript>
         <span>
