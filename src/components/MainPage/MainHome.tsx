@@ -9,23 +9,21 @@ const MainHome = () => {
   const { id: userId = '' } = useParams()
   const { user } = useUser(userId)
 
+  const subjectArr = ["물리", "화학"]
+
+
   return (
     <MainHomeWrapper>
       <div className="user-name">
         {user?.name} 님의 복습현황
       </div>
-      {/* <Descript>
-        <span>
-          원칙 공부를 통해 기출문제를 분석하세요<br/>
-          테마별로 연습 할 수 있습니다 !<br/>
-          다시 풀어보고 싶은문제를 체크하면<br/>
-          복습문제에서 보실 수 있습니다.<br/>
-        </span>
-      </Descript>
-      <div className="logout">
-        <Button onClick={ () => navigate('/') }>로그아웃</Button>
-      </div> */}
-      <PersonChart/>
+      {subjectArr.map((subject,i) => (
+        <PersonChart
+          key={i}
+          userId={userId}
+          subject={subject}
+        />
+      ))}
     </MainHomeWrapper>
   )
 }

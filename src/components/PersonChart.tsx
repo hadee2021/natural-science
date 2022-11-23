@@ -1,4 +1,5 @@
-import React from 'react'
+ /* eslint-disable */ 
+import React, { useMemo }  from 'react'
 import styled from 'styled-components'
 import { Bar } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend,
@@ -7,22 +8,35 @@ import { Chart, ArcElement, Tooltip, Legend,
   BarElement,
 } from "chart.js"
 Chart.register(ArcElement,Tooltip,Legend,CategoryScale,LinearScale,BarElement)
+import { useCheckQuestionList } from '../core/query' 
+import { groupBy } from 'lodash'
 
-const PersonChart = () => {
+interface Props {
+  userId: string
+  subject: string
+}
+
+const PersonChart = ({ userId, subject }: Props) => {
+
+  const {
+    checkQuestionList
+  } = useCheckQuestionList(userId, subject, 'questionNumber', 'asc')
+
+  const checkObj = groupBy(checkQuestionList, 'step')
+  const checkStepEntries:[string, object[]][] = useMemo(
+    () => Object.entries(checkObj),
+    [[...checkQuestionList]]
+  )
+
+
   const data = {
     labels: [
-      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
-      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
-      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange',
-      '1단원 역학', '1단원 에너지', '2단원 전기에너지', '3단원 파동', 'Purple', 'Orange'
+      "단원 문제"
     ],
     datasets: [{
       label: '복습문항 수',
       data: [
-        12, 19, 3, 15, 2, 3,
-        12, 19, 3, 15, 2, 3,
-        12, 19, 3, 5, 12, 3,
-        12, 19, 3, 5, 2, 13
+        1
       ],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
@@ -44,6 +58,12 @@ const PersonChart = () => {
     }]
   }
 
+  checkStepEntries.map(([step, checkQuestionList]) =>{
+    let len = checkQuestionList?.length
+    data.labels.push(step)
+    data.datasets[0].data.push(len)
+  })
+
   const options = {
     responsive: true,
     plugins: {
@@ -59,7 +79,7 @@ const PersonChart = () => {
 
   return (
     <ChartWrapper>
-      <div>물리 나의 복습문제</div>
+      <div>{subject} 복습문제</div>
       <Bar
         data={data}
         options={options}
