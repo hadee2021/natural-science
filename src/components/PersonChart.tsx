@@ -1,6 +1,6 @@
  /* eslint-disable */ 
 import React, { useMemo }  from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Bar } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend,
   CategoryScale,
@@ -13,6 +13,10 @@ import { groupBy } from 'lodash'
 
 interface Props {
   userId: string
+  subject: string
+}
+
+interface SubjectFont {
   subject: string
 }
 
@@ -78,8 +82,10 @@ const PersonChart = ({ userId, subject }: Props) => {
   }
 
   return (
-    <ChartWrapper>
-      <div>{subject} 복습문제</div>
+    <ChartWrapper
+      subject={subject}
+    >
+      <div className="chart-title">{subject} 복습문제</div>
       <Bar
         data={data}
         options={options}
@@ -90,7 +96,52 @@ const PersonChart = ({ userId, subject }: Props) => {
 
 export default PersonChart
 
+const getSubjectContainerColor = (subject: string) => {
+  let fontColor
+  switch(subject) {
+    case "물리":
+      fontColor = "#2F74C0"
+      break
+
+    case "화학":
+      fontColor = "#F79C0F"
+      break
+
+    default :
+      fontColor = "#2F74C0"
+      break
+  }
+  return css`
+    color: ${fontColor};
+  `
+}
+
 const ChartWrapper = styled.div`
   width: 75%;
   margin-left: 90px;
+  margin-bottom: 50px;
+
+  .chart-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    ${({subject}: SubjectFont) => getSubjectContainerColor(subject)}
+  }
+
+  @media screen and (max-width: 900px) {
+    margin-left: 70px;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 50px;
+    .chart-title {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .chart-title {
+      font-size: 16px;
+    }
+  }
 `

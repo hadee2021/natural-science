@@ -32,34 +32,29 @@ export default MainHome
 
 const MainHomeWrapper = styled.div`
   .user-name {
-    font-size: 25px;
+    font-size: 27px;
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 65px;
-  }
-  .logout {
-    display: flex;
-    justify-content: flex-end;
-    width: 340px;
-    margin: 0 auto;
     margin-top: 20px;
+    margin-bottom: 65px;
+    font-weight: bold;
   }
+
   @media screen and (max-width: 768px) {
-    .logout {
-      width: 250px;
+    .user-name {
+      font-size: 23px;
+      margin-top: 41px;
     }
   }
 
-  @media screen and (max-width: 495px) {
-    .logout {
-      width: 200px;
+  @media screen and (max-width: 560px) {
+    .user-name {
+      font-size: 18px;
+      margin-top: 41px;
     }
   }
 
   @media screen and (max-width: 410px) {
-    .logout {
-      width: 130px;
-    }
+
   }
 `
 
