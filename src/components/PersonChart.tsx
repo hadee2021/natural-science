@@ -32,6 +32,9 @@ const PersonChart = ({ userId, subject }: Props) => {
     () => Object.entries(checkObj),
     [[...checkQuestionList]]
   )
+  checkStepEntries.sort((a,b) => {
+    return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0
+  })
 
 
   const data = {
