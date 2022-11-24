@@ -182,7 +182,7 @@ const MainNavWrapper = styled.div`
   @media screen and (max-width: 768px) {
     width: 150px;
     min-width: 150px;
-    font-size: 15px;
+    font-size: 16px;
     .time {
       font-size: 20px;
     }

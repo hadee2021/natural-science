@@ -43,7 +43,7 @@ const CheckSubject = ({ subject }: Prop) => {
   checkStepEntries.sort((a,b) => {
     return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0
   })
-  
+
 
   return (
     <SubjectWrapper>
@@ -115,7 +115,6 @@ const SubjectContainer = styled.div<SubjectFont>`
 
   @media screen and (max-width: 768px) {
     font-size: 19px;
-    margin: 45px 0;
   }
 
   @media screen and (max-width: 520px) {

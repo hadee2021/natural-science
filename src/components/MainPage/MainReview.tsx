@@ -39,4 +39,13 @@ const ReviewHeader = styled.div`
     font-weight: bold;
     font-size: 20px;
   }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 40px;
+
+    > div:first-child,
+    > div > button {
+      font-size: 18px;
+    }
+  }
 `

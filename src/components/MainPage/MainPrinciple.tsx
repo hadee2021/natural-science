@@ -1,5 +1,5 @@
  /* eslint-disable */ 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { subjectObj } from '../../module/subjectData'
 import styled from 'styled-components'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -9,7 +9,11 @@ import { questionDataAtom, IsQuestionUpdateAtom, IsQuickAddAtom } from '../../co
 import { useUser } from '../../core/query'
 import { Fab } from '@mui/material'
 import { Add } from '@mui/icons-material'
+import { getSubjectFontColor } from '../../module/styleFunc'
 
+interface SubjectFont {
+  subject: string
+}
 
 const MainPrinciple = () => {
   const navigate = useNavigate()
@@ -62,9 +66,13 @@ const MainPrinciple = () => {
     <PrincipleWrapper>
       <PrincipleHeader>
         {subjectObj.subjects.map((subject,i) => (
-          <div key={i} onClick={() => setTabSubject(subject.id as Subject)}>
-            {subject.name}
-          </div>
+          <PrincipleSubject
+            key={i} 
+            subject={subject.name}
+            onClick={() => setTabSubject(subject.id as Subject)}
+          >
+            #{subject.name}
+          </PrincipleSubject>
         ))}
       </PrincipleHeader>
       <PrincipleList>
@@ -116,22 +124,29 @@ const PrincipleHeader = styled.div`
   display: flex;
   margin: 25px 0;
 
-  > div {
-    margin: 0 20px;
-    padding: 10px 20px;
-    border: 1px solid orangered;
-    border-radius: 10px;
-    cursor: pointer;
+  @media screen and (max-width: 768px) {
+    margin-top: 46px;
   }
 
   @media screen and (max-width: 560px) {
     margin: 15px 0;
     overflow-x: auto;
 
-    > div {
-      margin: 0 10px;
-      padding: 5px 10px;
-    }
+  }
+`
+
+const PrincipleSubject = styled.div`
+  ${({subject}: SubjectFont) => getSubjectFontColor(subject)}
+  margin-left: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+
+  @media screen and (max-width: 560px) {
+    margin: 0 10px;
+    padding: 5px 10px;
+    font-size: 15px;
   }
 `
 

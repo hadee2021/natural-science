@@ -53,9 +53,6 @@ const MainHomeWrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 410px) {
-
-  }
 `
 
 const Descript = styled.div`

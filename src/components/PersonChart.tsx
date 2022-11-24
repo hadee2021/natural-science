@@ -42,7 +42,7 @@ const PersonChart = ({ userId, subject }: Props) => {
       "단원 문제"
     ],
     datasets: [{
-      label: '복습문항 수',
+      label: '복습문항',
       data: [
         1
       ],
@@ -124,6 +124,7 @@ const ChartWrapper = styled.div`
   }
 
   @media screen and (max-width: 560px) {
+    margin-left: 30px;
     .chart-title {
       font-size: 16px;
     }
