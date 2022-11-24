@@ -7,7 +7,8 @@ import CheckGroup from './CheckGroup'
 import { checkQuestionListContext } from '../../module/questionContext'
 import { checkSortContext } from '../../module/checkSortContext'
 import { OrderByDirection } from 'firebase/firestore'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import { getSubjectFontColor } from '../../module/styleFunc'
 
 interface Prop {
   subject: string
@@ -87,35 +88,14 @@ const CheckSubject = ({ subject }: Prop) => {
 export default CheckSubject
 
 const SubjectWrapper = styled.div`
-  margin: 18px 0;
+  margin: 25px 0;
 `
-
-const getSubjectContainerColor = (subject: string) => {
-  let fontColor
-  switch(subject) {
-    case "물리":
-      fontColor = "#2F74C0"
-      break
-
-    case "화학":
-      fontColor = "#F79C0F"
-      break
-
-    default :
-      fontColor = "#2F74C0"
-      break
-  }
-  return css`
-    color: ${fontColor};
-  `
-}
-
 
 const SubjectContainer = styled.div<SubjectFont>`
   display: flex;
 
   > span:first-child {
-    ${({subject}: SubjectFont) => getSubjectContainerColor(subject)}
+    ${({subject}: SubjectFont) => getSubjectFontColor(subject)}
     font-size: 20px;
     font-weight: bold;
     margin-right: 15px;

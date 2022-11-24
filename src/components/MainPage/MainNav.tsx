@@ -66,7 +66,7 @@ const MainNav = ({userName} : Props) => {
       >
         <div>
           <FontAwesomeIcon icon={faStar} style={{ color: "#FFCA2B" }}/>
-          <span>복습문제</span>
+          <span>복습 문제</span>
         </div>
         {pathname === `/main/${userId}/review` &&
           <FontAwesomeIcon icon={faAngleRight}/>

@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Box, Collapse, Typography, IconButton } from '@mui/material'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
-import styled, { css }  from 'styled-components'
+import styled from 'styled-components'
 import { ModalImgSrcAtom } from '../../core/Atom'
 import { useRecoilState } from 'recoil'
 import { Close } from '@mui/icons-material'
 import CheckGroupBody from './CheckGroupBody'
+import { getSubjectBgColor } from '../../module/styleFunc'
 
 
 interface Props {
@@ -71,25 +72,6 @@ const CheckGroup = ({subject, step}: Props) => {
 
 export default CheckGroup
 
-const getSubjectBgColor = (subject: string) => {
-  let bgColor
-  switch(subject) {
-    case "물리":
-      bgColor = "#61dafb6b"
-      break
-
-    case "화학":
-      bgColor = "#f79c0fc9"
-      break
-
-    default :
-      bgColor = "#61dafb6b"
-      break
-  }
-  return css`
-    background-color: ${bgColor};
-  `
-}
 
 const CheckGroupHeader = styled.div<SubjectBg>`
   display: flex;

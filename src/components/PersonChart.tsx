@@ -1,6 +1,7 @@
  /* eslint-disable */ 
 import React, { useMemo }  from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
+import { getSubjectFontColor } from '../module/styleFunc'
 import { Bar } from 'react-chartjs-2'
 import { Chart, ArcElement, Tooltip, Legend,
   CategoryScale,
@@ -96,26 +97,6 @@ const PersonChart = ({ userId, subject }: Props) => {
 
 export default PersonChart
 
-const getSubjectContainerColor = (subject: string) => {
-  let fontColor
-  switch(subject) {
-    case "물리":
-      fontColor = "#2F74C0"
-      break
-
-    case "화학":
-      fontColor = "#F79C0F"
-      break
-
-    default :
-      fontColor = "#2F74C0"
-      break
-  }
-  return css`
-    color: ${fontColor};
-  `
-}
-
 const ChartWrapper = styled.div`
   width: 75%;
   margin-left: 90px;
@@ -125,7 +106,7 @@ const ChartWrapper = styled.div`
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 20px;
-    ${({subject}: SubjectFont) => getSubjectContainerColor(subject)}
+    ${({subject}: SubjectFont) => getSubjectFontColor(subject)}
   }
 
   @media screen and (max-width: 900px) {
