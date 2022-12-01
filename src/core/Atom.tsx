@@ -42,7 +42,7 @@ export const questionBookDataAtom = atom({
     questionBookPrice: 0,
     questionBookDetail: '',
     questionBookShop: '',
-    questionBookpdf: ''
+    questionBookPdf: ''
   }
 })
 

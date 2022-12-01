@@ -69,7 +69,7 @@ const WorkBookForm = () => {
     if(!questionBookUpdate) return
     setInputSubject(questionBookData.subject)
     setImageURL(questionBookData.imgSrc)
-    setPdfURL(questionBookData.questionBookpdf)
+    setPdfURL(questionBookData.questionBookPdf)
     questionBookForm.reset({
       questionBookSeq: questionBookData.questionBookSeq,
       questionBookTitle: questionBookData.questionBookTitle,
@@ -121,7 +121,7 @@ const WorkBookForm = () => {
       questionBookPrice: questionBookPrice,
       questionBookDetail: questionBookDetail,
       questionBookShop: questionBookShop,
-      questionBookpdf: pdfURL
+      questionBookPdf: pdfURL
     }
 
     editQuestionBook(nextQuestionBookForm)
@@ -135,7 +135,7 @@ const WorkBookForm = () => {
       questionBookPrice: 0,
       questionBookDetail: '',
       questionBookShop: '',
-      questionBookpdf: ''
+      questionBookPdf: ''
     })
     setQuestionBookUpdate(false) // 수정 끝
 

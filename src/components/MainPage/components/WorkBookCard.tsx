@@ -36,7 +36,7 @@ const WorkBookCard = ({ questionBook, isAdmin, userId }: Props) => {
       questionBookPrice: questionBook.questionBookPrice,
       questionBookDetail: questionBook.questionBookDetail,
       questionBookShop: questionBook.questionBookShop,
-      questionBookpdf: questionBook.questionBookpdf
+      questionBookPdf: questionBook.questionBookPdf
     })
     setQuestionBookUpdate(true)
     navigate(`/main/${userId}/workbook/form`)

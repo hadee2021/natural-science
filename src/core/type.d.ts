@@ -35,7 +35,7 @@ declare interface QuestionBook {
   questionBookPrice: number
   questionBookDetail: string
   questionBookShop: string
-  questionBookpdf: string
+  questionBookPdf: string
 }
 
 declare type Subject = "physical" | "chemical"

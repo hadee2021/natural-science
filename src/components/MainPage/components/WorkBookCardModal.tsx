@@ -42,7 +42,7 @@ const WorkBookCardModal = ({ modalClose, questionBook }: Props) => {
           <div className="modal-book-pdf">
             <span>PDF 맛보기</span>
             <embed
-              src={questionBook.questionBookpdf}
+              src={questionBook.questionBookPdf}
             />
           </div>
         </ModalContent>
