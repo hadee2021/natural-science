@@ -153,7 +153,7 @@ const QuestionForm = () => {
     setQuestionUpdate(false) // 수정 끝
     setQuestionQuickAdd(false) // 빠른추가 끝
 
-    navigate(`/main/${userId}`)
+    navigate(`/main/${userId}/principle`)
   })
 
   return (

@@ -28,6 +28,12 @@ const EMPTY_STEP = 'EMPTY_STEP'
 const QUESTION_LIST = '문제'
 const EMPTY_QUESTION_ID = 'EMPTY_QUESTION_ID'
 
+const ROOT_QUESTIONBOOK = 'questionBook'
+const questionBookConverter = getDefaultConverter<QuestionBook>()
+const EMPTY_QUESTIONBOOK_SUBJECT = 'EMPTY_QUESTIONBOOK_SUBJECT'
+const QUESTION_BOOK = '문제집'
+const EMPTY_QUESTIONBOOK_ID = 'EMPTY_QUESTIONBOOK_ID'
+
 const getUserCollectionRef = () => (
   collection(fireStore, ROOT_USER).withConverter(userConverter)
 )
@@ -80,6 +86,25 @@ const getQuestionDocRef = (subject: Subject | string, step: string, questionId: 
     QUESTION_LIST,
     questionId || EMPTY_QUESTION_ID
   ).withConverter(questionConverter)
+}
+
+const getQuestionBookCollectionRef = (subject: Subject | string) => {
+  return collection(
+    fireStore,
+    ROOT_QUESTIONBOOK,
+    subject || EMPTY_QUESTIONBOOK_SUBJECT,
+    QUESTION_BOOK
+  ).withConverter(questionBookConverter)
+}
+
+const getQuestionBookDocRef = (subject: Subject | string, questionBookId: string) => {
+  return doc(
+    fireStore,
+    ROOT_QUESTIONBOOK,
+    subject || EMPTY_QUESTIONBOOK_SUBJECT,
+    QUESTION_BOOK,
+    questionBookId || EMPTY_QUESTIONBOOK_ID
+  ).withConverter(questionBookConverter)
 }
 
 
@@ -293,6 +318,7 @@ export const useDeleteQuestion = (subject: Subject | string, step: string, quest
   const {
     refetch: refetchQuestionList,
   } = useQuestionList(subject, step)
+
   const { mutate, ...result } = useFirestoreDocumentDeletion(questionDocRef, {
     onSuccess() {
       refetchQuestionList()
@@ -303,6 +329,86 @@ export const useDeleteQuestion = (subject: Subject | string, step: string, quest
     ...result,
     deleteQuestion(options?: Parameters<typeof mutate>[1]) {
       if(!questionId || questionId === EMPTY_QUESTION_ID) return
+      mutate(undefined, options)
+    }
+  }
+}
+
+/** 문제집 추가 및 수정 */
+
+export const useEditQuestionBook = (subject: Subject | string, questionBookId?: string) => {
+  const questionBookDocId = questionBookId ?? nanoid(5)
+  const questionBookDocRef = getQuestionBookDocRef(subject, questionBookDocId)
+
+  const { mutate, ...result } = useFirestoreDocumentMutation(questionBookDocRef, { merge: true })
+  
+  return {
+    ...result,
+    questionBookDocId,
+    editQuestionBook(questionBookForm: QuestionBook, options?: Parameters<typeof mutate>[1]) {
+      mutate({...questionBookForm, id: questionBookDocId}, options)
+    }
+  }
+}
+
+/** 과목별 문제집 가져오기 */
+
+export const useQuestionBookList = (subject: Subject | string) => {
+  const questionBookCollectionRef = getQuestionBookCollectionRef(subject)
+
+  const constraints: QueryConstraint[] = []
+  constraints.push(orderBy('questionBookSeq', 'asc'))
+  const queryConstraints = constraints
+
+  const ref = query(
+    questionBookCollectionRef,
+    ...queryConstraints
+  )
+
+  const {
+    data: questionBookList = [],
+    dataUpdatedAt,
+    ...result
+  } = useFirestoreQueryData(
+    [ROOT_QUESTIONBOOK, subject, QUESTION_BOOK],
+    ref,
+    { subscribe: true },
+    { enabled: Boolean(subject) },
+  )
+
+  questionBookList.sort((a: { questionBookSeq: number }, b: { questionBookSeq: number }) => {
+    return a.questionBookSeq - b.questionBookSeq
+  })
+
+  return useMemo(() => {
+
+    return {
+      questionBookList,
+      dataUpdatedAt,
+      ...result,
+    }
+  },[dataUpdatedAt])
+
+}
+
+/** 과목별 문제집 삭제 */
+
+export const useDeleteQuestionBook = (subject: Subject | string, questionBookId = EMPTY_QUESTIONBOOK_ID) => {
+  const questionBookDocRef = getQuestionBookDocRef(subject, questionBookId)
+  const {
+    refetch: refetchQuestionBookList,
+  } = useQuestionBookList(subject)
+
+  const { mutate, ...result } = useFirestoreDocumentDeletion(questionBookDocRef, {
+    onSuccess() {
+      refetchQuestionBookList()
+    }
+  })
+
+  return {
+    ...result,
+    deleteQuestionBook(options?: Parameters<typeof mutate>[1]) {
+      if(!questionBookId || questionBookId === EMPTY_QUESTIONBOOK_ID) return
       mutate(undefined, options)
     }
   }

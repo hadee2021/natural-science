@@ -12,6 +12,7 @@ import MainWorkBook from './components/MainPage/MainWorkBook'
 import MainVideo from './components/MainPage/MainVideo'
 import MainNotice from './components/MainPage/MainNotice'
 import Study from './pages/Study'
+import PrivateWorkBook from './router/PrivateWorkBook'
 
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
           <Route path="review" element={<MainReview/>} />
           <Route path="principle" element={<MainPrinciple/>}/>
           <Route path="workbook" element={<MainWorkBook/>}/>
+          <Route path="workbook/form" element={<PrivateWorkBook/>}/>
           <Route path="video" element={<MainVideo/>}/>
           <Route path="notice" element={<MainNotice/>}/>
         </Route>

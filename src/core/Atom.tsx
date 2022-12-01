@@ -30,3 +30,23 @@ export const ModalImgSrcAtom = atom({
   key: 'ModalImgSrc',
   default: ''
 })
+
+export const questionBookDataAtom = atom({
+  key: 'questionBook',
+  default: {
+    id: '',
+    subject: '',
+    imgSrc: '',
+    questionBookSeq: 1,
+    questionBookTitle: '',
+    questionBookPrice: 0,
+    questionBookDetail: '',
+    questionBookShop: '',
+    questionBookpdf: ''
+  }
+})
+
+export const IsQuestionBookUpdateAtom = atom({
+  key: 'questionBookUpdate',
+  default: false
+})

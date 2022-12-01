@@ -26,4 +26,16 @@ declare interface Question {
   [sortKey: string] : number // 정렬용도
 }
 
+declare interface QuestionBook {
+  id: string
+  subject: string
+  imgSrc: string
+  questionBookSeq: number
+  questionBookTitle: string
+  questionBookPrice: number
+  questionBookDetail: string
+  questionBookShop: string
+  questionBookpdf: string
+}
+
 declare type Subject = "physical" | "chemical"

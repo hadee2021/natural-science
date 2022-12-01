@@ -1,41 +1,117 @@
-import React from 'react'
+ /* eslint-disable */ 
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import Atropos from 'atropos/react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useUser } from '../../core/query'
+import { Fab } from '@mui/material'
+import { Add } from '@mui/icons-material'
+import { useRecoilState } from 'recoil'
+import { questionBookDataAtom, IsQuestionBookUpdateAtom } from '../../core/Atom'
+import { useQuestionBookList } from '../../core/query'
+import SubjectButton from '../button/SubjectButton'
+import WorkBookCard from './components/WorkBookCard'
+
 
 const MainWorkBook = () => {
+  const navigate = useNavigate()
+  const { id: userId = '' } = useParams()
+  const { user } = useUser(userId)
+
+  const subjectArr = ['물리','화학']
+  const [tabSubject, setTabSubject] = useState<string>('물리')
+
+  const { questionBookList } = useQuestionBookList(tabSubject)
+
+  // 새로추가
+  const goToWorkBookForm = () => {
+    // setQuestionData({
+    //   ...questionData,
+    //   step : '',
+    //   questionSequence: 1,
+    // })
+    setQuestionBookUpdate(false) // 수정이 아니다.
+    navigate(`/main/${userId}/workbook/form`)
+  }
+
+  //수정
+  const [questionBookData, setQuestionBookData] = useRecoilState(questionBookDataAtom)
+  const [questionBookUpdate, setQuestionBookUpdate] = useRecoilState(IsQuestionBookUpdateAtom)
+  
+  
+  //
+
   return (
-    <div>
-      <WorkBookWraaper>
-        <Atropos 
-          shadow={false}
+    <WorkBookWrapper>
+      <WorkBookHeader>
+        {subjectArr.map((subject,i) => (
+          <SubjectButton
+            key={i}
+            subject={subject}
+            setTabSubject={setTabSubject}
+          />
+        ))}
+      </WorkBookHeader>
+      <WorkBookBody>
+        {questionBookList.map((questionBook: QuestionBook) => (
+          <WorkBookCard
+            key={questionBook.id}
+            questionBook={questionBook}
+            userId={userId}
+            isAdmin={user?.author}
+          />
+        ))}
+      </WorkBookBody>
+      {user?.author &&
+        <Fab
+          color="primary"
+          sx={{
+            position :"fixed",
+            right: 20,
+            bottom: 20
+          }}
+          onClick={() => goToWorkBookForm()}
         >
-          <img src="/PIC/수특 물리.png" data-atropos-offset="5" />
-        </Atropos>
-        <Atropos 
-          shadow={false}
-        >
-          <img src="/PIC/수특 기하.png" data-atropos-offset="5" />
-        </Atropos>
-        <Atropos 
-          shadow={false}
-        >
-          <img src="/PIC/수특 영어.png" data-atropos-offset="5" />
-        </Atropos>
-      </WorkBookWraaper>
-    </div>
+          <Add fontSize="large" />
+        </Fab>
+      }
+    </WorkBookWrapper>
   )
 }
 
 export default MainWorkBook
 
-const WorkBookWraaper = styled.div`
+const WorkBookWrapper = styled.div`
   
-  display: flex;
-  gap: 25px;
-  margin-left: 100px;
+`
 
-  img {
-    width: 180px;
-    cursor: pointer;
+const WorkBookHeader = styled.div`
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 40px;
+
+  > div:first-child {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-top: 40px;
+
+    > div:first-child,
+    > div > button {
+      font-size: 18px;
+    }
+  }
+`
+const WorkBookBody = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  gap: 40px;
+
+  @media screen and (max-width: 868px) {
+    justify-content: center;
   }
 `
