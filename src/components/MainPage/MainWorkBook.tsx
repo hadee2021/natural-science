@@ -6,7 +6,7 @@ import { useUser } from '../../core/query'
 import { Fab } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { useRecoilState } from 'recoil'
-import { questionBookDataAtom, IsQuestionBookUpdateAtom } from '../../core/Atom'
+import { IsQuestionBookUpdateAtom } from '../../core/Atom'
 import { useQuestionBookList } from '../../core/query'
 import SubjectButton from '../button/SubjectButton'
 import WorkBookCard from './components/WorkBookCard'
@@ -22,23 +22,14 @@ const MainWorkBook = () => {
 
   const { questionBookList } = useQuestionBookList(tabSubject)
 
+  // 수정 여부
+  const [questionBookUpdate, setQuestionBookUpdate] = useRecoilState(IsQuestionBookUpdateAtom)
+
   // 새로추가
   const goToWorkBookForm = () => {
-    // setQuestionData({
-    //   ...questionData,
-    //   step : '',
-    //   questionSequence: 1,
-    // })
     setQuestionBookUpdate(false) // 수정이 아니다.
     navigate(`/main/${userId}/workbook/form`)
   }
-
-  //수정
-  const [questionBookData, setQuestionBookData] = useRecoilState(questionBookDataAtom)
-  const [questionBookUpdate, setQuestionBookUpdate] = useRecoilState(IsQuestionBookUpdateAtom)
-  
-  
-  //
 
   return (
     <WorkBookWrapper>

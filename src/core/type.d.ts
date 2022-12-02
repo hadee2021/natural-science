@@ -38,4 +38,13 @@ declare interface QuestionBook {
   questionBookPdf: string
 }
 
+declare interface Video {
+  id: string
+  subject: string
+  thumbnailSrc: string
+  videoSeq: number
+  videoTitle: string
+  videoYoutube: string
+}
+
 declare type Subject = "physical" | "chemical"

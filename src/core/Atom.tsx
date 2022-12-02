@@ -50,3 +50,20 @@ export const IsQuestionBookUpdateAtom = atom({
   key: 'questionBookUpdate',
   default: false
 })
+
+export const videoDataAtom = atom({
+  key: 'video',
+  default: {
+    id: '',
+    subject: '',
+    thumbnailSrc: '',
+    videoSeq: 1,
+    videoTitle: '',
+    videoYoutube: ''
+  }
+})
+
+export const IsVideoUpdateAtom = atom({
+  key: 'videoUpdate',
+  default: false
+})

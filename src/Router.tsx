@@ -13,6 +13,7 @@ import MainVideo from './components/MainPage/MainVideo'
 import MainNotice from './components/MainPage/MainNotice'
 import Study from './pages/Study'
 import PrivateWorkBook from './router/PrivateWorkBook'
+import PrivateVideo from './router/PrivateVideo'
 
 
 const Router = () => {
@@ -29,6 +30,7 @@ const Router = () => {
           <Route path="workbook" element={<MainWorkBook/>}/>
           <Route path="workbook/form" element={<PrivateWorkBook/>}/>
           <Route path="video" element={<MainVideo/>}/>
+          <Route path="video/form" element={<PrivateVideo/>}/>
           <Route path="notice" element={<MainNotice/>}/>
         </Route>
         <Route path="/study/:id/:subject/:step/:subjectId" element={<Study/>}/>

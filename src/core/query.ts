@@ -34,6 +34,13 @@ const EMPTY_QUESTIONBOOK_SUBJECT = 'EMPTY_QUESTIONBOOK_SUBJECT'
 const QUESTION_BOOK = '문제집'
 const EMPTY_QUESTIONBOOK_ID = 'EMPTY_QUESTIONBOOK_ID'
 
+const ROOT_VIDEO = 'video'
+const videoConverter = getDefaultConverter<Video>()
+const EMPTY_VIDEO_SUBJECT = 'EMPTY_VIDEO_SUBJECT'
+const VIDEO = '영상'
+const EMPTY_VIDEO_ID = 'EMPTY_VIDEO_ID'
+
+
 const getUserCollectionRef = () => (
   collection(fireStore, ROOT_USER).withConverter(userConverter)
 )
@@ -105,6 +112,25 @@ const getQuestionBookDocRef = (subject: Subject | string, questionBookId: string
     QUESTION_BOOK,
     questionBookId || EMPTY_QUESTIONBOOK_ID
   ).withConverter(questionBookConverter)
+}
+
+const getVideoCollectionRef = (subject: Subject | string) => {
+  return collection(
+    fireStore,
+    ROOT_VIDEO,
+    subject || EMPTY_VIDEO_SUBJECT,
+    VIDEO
+  ).withConverter(videoConverter)
+}
+
+const getVideoDocRef = (subject: Subject | string, videoId: string) => {
+  return doc(
+    fireStore,
+    ROOT_VIDEO,
+    subject || EMPTY_VIDEO_SUBJECT,
+    VIDEO,
+    videoId || EMPTY_VIDEO_ID
+  ).withConverter(videoConverter)
 }
 
 
@@ -409,6 +435,90 @@ export const useDeleteQuestionBook = (subject: Subject | string, questionBookId 
     ...result,
     deleteQuestionBook(options?: Parameters<typeof mutate>[1]) {
       if(!questionBookId || questionBookId === EMPTY_QUESTIONBOOK_ID) return
+      mutate(undefined, options)
+    }
+  }
+}
+
+/** 추천영상 추가 및 수정 */
+
+export const useEditVideo = (subject: Subject | string, videoId?: string) => {
+  const videoDocId = videoId ?? nanoid(5)
+  const videoDocRef = getVideoDocRef(subject, videoDocId)
+
+  const { mutate, ...result } = useFirestoreDocumentMutation(videoDocRef, { merge: true })
+
+  return {
+    ...result,
+    videoDocId,
+    editVideo(videoForm: Video, options?: Parameters<typeof mutate>[1]) {
+      mutate({...videoForm, id: videoDocId}, options)
+    }
+  }
+}
+
+
+/** 추천영상 가져오기 */
+
+export const useVideoList = (subject: Subject | string) => {
+  const videoCollectionRef = getVideoCollectionRef(subject)
+
+  const constraints: QueryConstraint[] = []
+  constraints.push(orderBy('videoSeq', 'asc'))
+  const queryConstraints = constraints
+
+  const ref = query(
+    videoCollectionRef,
+    ...queryConstraints
+  )
+
+  const {
+    data: videoList = [],
+    dataUpdatedAt,
+    ...result
+  } = useFirestoreQueryData(
+    [ROOT_VIDEO, subject, VIDEO],
+    ref,
+    { subscribe: true },
+    { enabled: Boolean(subject) },
+  )
+
+  videoList.sort((a: { videoSeq: number }, b: { videoSeq: number }) => {
+    return a.videoSeq - b.videoSeq
+  })
+
+  return useMemo(() => {
+
+    return {
+      videoList,
+      dataUpdatedAt,
+      ...result,
+    }
+  },[dataUpdatedAt])
+
+}
+
+
+/** 추천 영상 삭제 */
+
+export const useDeleteVideo = (subject: Subject | string, videoId = EMPTY_VIDEO_ID) => {
+
+  const videoDocRef = getVideoDocRef(subject, videoId)
+
+  const {
+    refetch: refetchVideoList,
+  } = useVideoList(subject)
+
+  const { mutate, ...result } = useFirestoreDocumentDeletion(videoDocRef, {
+    onSuccess() {
+      refetchVideoList()
+    }
+  })
+
+  return {
+    ...result,
+    deleteVideo(options?: Parameters<typeof mutate>[1]) {
+      if(!videoId || videoId === EMPTY_VIDEO_ID) return
       mutate(undefined, options)
     }
   }
