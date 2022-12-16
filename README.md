@@ -22,7 +22,7 @@ Link: https://natural-science-a2e20.web.app/
 ## Core Framework
 ![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-**사용 근거** )
+**사용 근거** 
 
 hook을 이용하여 상태관리를 하고 router의 사용이 Vue 3 보다 직관적이고
 
@@ -30,7 +30,7 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-**사용 근거** )
+**사용 근거** 
 
 유저정보, 문제정보 처럼 주요한 상태정보는 타입을 정하여 오류를 미리방지하고
 
@@ -38,7 +38,7 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 
 ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
 
-**사용 근거** )
+**사용 근거** 
 
 firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing을 활용하면 중복된 요청을 피할 수 있어서 
 
@@ -49,7 +49,7 @@ firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing�
 ## Design
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
-**사용 근거** )
+**사용 근거** 
 
 버튼, 아이콘, 등의 스타일을 제공하는 라이브러리를 사용하여 CSS의 의존도를 낮추었습니다.
 
@@ -61,7 +61,7 @@ firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing�
 
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
-**사용 근거** )
+**사용 근거** 
 
 서버는 Firebase로 학생과 문제의 정보를 collection과 document 구조를 활용하여 
 
