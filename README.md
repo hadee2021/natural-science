@@ -128,16 +128,17 @@ firebase를 서버로 활용하여 정보를 요청하는 과정에서 cashing�
 ### 복습하기
 
 
+![003 복습문제](https://user-images.githubusercontent.com/85422934/208045259-f7307422-0613-4b33-8f31-95cc0063c7af.png)
 
 <br/><br/> 
 
 아까 문제학습에서 복습하기에 추가한 문제를 학습 할 수 있습니다.
 
 문제 사진을 미니 사이즈로 하여 한눈에 찾아 볼 수 있게 하였고
-
-
-
 <br/><br/> 
+
+![003 복습문제 2](https://user-images.githubusercontent.com/85422934/208045484-a5250d40-12f5-485c-85d7-6c80838f4bc7.png)
+
 
 사진을 클릭하면 확대하여 보실 수 있습니다.
 <br/><br/><br/> 
