@@ -14,15 +14,12 @@ Link: https://natural-science-a2e20.web.app/
 
 
 
-
-
-
 ---
 ## 개발 환경
 ## Core Framework
 ![React](https://img.shields.io/badge/react-20232a.svg?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-**사용 근거** 
+**사용 관점** 
 
 hook을 이용하여 상태관리를 하고 router의 사용이 직관적이고
 
@@ -30,7 +27,7 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 
 ![TypeScript](https://img.shields.io/badge/typescript-007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
-**사용 근거** 
+**사용 관점** 
 
 유저정보, 문제정보 처럼 주요한 상태정보는 타입을 정하여 오류를 미리방지하고
 
@@ -38,7 +35,7 @@ Recoil, React Query, 등의 React의 라이브러리의 이점을 활용하고 �
 
 ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
 
-**사용 근거** 
+**사용 관점** 
 
 firebase를 서버로 활용하여 가져온 데이터를 캐싱하여 중복 요청을 방지하고
 
@@ -49,7 +46,7 @@ firebase를 서버로 활용하여 가져온 데이터를 캐싱하여 중복 �
 ## Design
 ![MUI](https://img.shields.io/badge/MUI-0081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
 
-**사용 근거** 
+**사용 관점** 
 
 버튼, 아이콘, 등의 스타일을 제공하는 라이브러리를 사용하여 CSS의 의존도를 낮추었습니다.
 
@@ -61,13 +58,14 @@ firebase를 서버로 활용하여 가져온 데이터를 캐싱하여 중복 �
 
 ![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
 
-**사용 근거** 
+**사용 관점** 
 
-서버는 Firebase로 학생과 문제의 정보를 collection과 document 구조를 활용하여 
-
-세부적으로 나누고 직관적으로 관리하기 위해 사용했습니다.
+서버는 Firebase에서 학생과 문제의 정보를 collection과 document 구조로 관리하였습니다.
 
 소켓통신을 기반으로 하기에 정보의 변화가 실시간으로 반영 됩니다.
+
+(사진의 경우 저장소 링크를 이용하기 때문에 이미지 파일을 사용하는것 보다 부하가 적습니다.)
+<br><br>
 
 호스팅 역시 Firebase를 사용했습니다.
 
