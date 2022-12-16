@@ -176,49 +176,62 @@ iframe을 통해 영상을 보여주었습니다.
 ## 관리자 관점
 
 
-### 홈
+### 1. 단원별 학습에서 빠른추가
 
-
-<br/><br/> 
-
-
-<br/><br/><br/> 
-
-### 문제 추가 양식
-
-
-<br/><br/> 
-
-문제 추가는 정해진 포맷을 제공합니다.
-<br/><br/><br/> 
-
-### 단원별 학습에서 빠른추가
-
-
+![009 관리자 페이지1](https://user-images.githubusercontent.com/85422934/208055547-78254cf5-647e-4e14-b7ed-a03077725b6e.png)
 <br/><br/> 
 
 같은 단원에서 새로운 문제를 추가한다면 단원별 학습에서 빠른 추가를 이용할 수 있습니다.
 <br/><br/> 
 
-
+![009 관리자 페이지2](https://user-images.githubusercontent.com/85422934/208055658-8e5289a2-e9f3-44f2-bb88-792904527726.png)
 <br/><br/> 
 
 과목과 단원을 자동완성해주고 문제 순서를 제공하는 점에서 편리성을 확보 하였습니다.
 <br/><br/><br/> 
 
 
-### 문제 수정
+### 2. 문제 수정
 
+![010 관리자 문제 수정](https://user-images.githubusercontent.com/85422934/208055730-732f7bde-3d2b-40c6-91b4-b6681520f88d.png)
 
 <br/><br/> 
 
 관리자는 문제카드에서 직접 문제의 정보를 수정 및 삭제 할 수 있습니다.
 <br/><br/> 
 
-
+![010 관리자 문제 수정 2](https://user-images.githubusercontent.com/85422934/208056055-99dea1b0-a1c7-4ca1-a1f9-5d2598c33458.png)
 <br/><br/> 
 
 문제를 수정하면 문제 양식에서 자동으로 기존의 정보를 동기화 시켜 보여줍니다.
+<br/><br/><br/> 
+
+### 3. 문제집
+
+![011 관리자 문제집](https://user-images.githubusercontent.com/85422934/208056394-671f6d28-109e-42f7-af1a-2bd6ca36e9e5.png)
+<br/><br/> 
+
+관리자는 문제집을 추가하거나 수정 및 삭제를 할 수 있습니다.
+<br/><br/> 
+
+![011 관리자 문제집 2 ](https://user-images.githubusercontent.com/85422934/208056543-281e8adb-86b1-49bc-a82c-63b41e935de6.png)
+<br/><br/> 
+
+문제집 양식 입니다.
+<br/><br/><br/> 
+
+### 4. 추천 영상
+
+![012 추천영상 1](https://user-images.githubusercontent.com/85422934/208057112-e0808c19-91a6-4a3f-88b4-36a53fa3876a.png)
+<br/><br/> 
+
+관리자는 영상을 추가하거나 수정 및 삭제를 할 수 있습니다.
+<br/><br/> 
+
+![012 추천영상 2](https://user-images.githubusercontent.com/85422934/208057172-fa582d20-51a8-44c9-b905-a606363c5753.png)
+<br/><br/> 
+
+영상 양식에서 링크를 입력하면 썸네일과 영상을 미리 확인 가능 합니다.
 <br/><br/><br/> 
 
 ---
